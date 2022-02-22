@@ -46,11 +46,11 @@ public class User implements Serializable {
 
 		private Boolean active;
 		
-		@OneToMany(cascade = CascadeType.ALL , mappedBy="accounts")
+		@OneToMany(cascade = CascadeType.ALL , mappedBy="users")
 
 		private List <Claim> claims;
 		
-		@OneToMany(cascade = CascadeType.ALL , mappedBy="accounts")
+		@OneToMany(cascade = CascadeType.ALL , mappedBy="users")
 
 		private List <Appointement> Appointements;
 

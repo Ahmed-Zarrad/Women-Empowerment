@@ -39,6 +39,6 @@ public class Appointement implements Serializable {
 	private String DescriptionApp ;
 	
 	@ManyToOne
-    User accounts;
+    User users;
 	
 }

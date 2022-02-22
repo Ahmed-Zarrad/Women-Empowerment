@@ -38,7 +38,7 @@ public class Claim implements Serializable  {
 		private Date DateClaim ;
 		
 		@ManyToOne
-        User accounts ;
+        User users ;
 		
 		
 
