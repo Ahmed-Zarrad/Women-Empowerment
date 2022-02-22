@@ -1,5 +1,6 @@
 package tn.esprit.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,7 @@ public class Membership implements Serializable {
     private String DurationMem;
     private String QRCodeMem;
 
+    @JsonIgnore
     @OneToOne
     private User user;
 

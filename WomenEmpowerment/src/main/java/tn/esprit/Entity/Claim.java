@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 @Entity
@@ -36,9 +37,9 @@ public class Claim implements Serializable  {
 		
 		@Temporal(TemporalType.DATE)
 		private Date DateClaim ;
-		
+		@JsonIgnore
 		@ManyToOne
-        User users ;
+        User user ;
 		
 		
 

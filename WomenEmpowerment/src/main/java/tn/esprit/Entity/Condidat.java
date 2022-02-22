@@ -1,5 +1,6 @@
 package tn.esprit.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,9 +34,13 @@ public class Condidat implements Serializable   {
 	private String Adress ;
 	@Enumerated(EnumType.STRING)
 	private Status status ;
-	
-	@ManyToOne 
+	@JsonIgnore
+	@ManyToOne (fetch = FetchType.EAGER)
 	JobOffre JobOffres ;
+	@JsonIgnore
+	@ManyToOne
+	User user ;
+
 	
 	
 	
