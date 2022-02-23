@@ -11,6 +11,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Publicity implements Serializable {
 
 	/**
@@ -57,5 +58,5 @@ public class Publicity implements Serializable {
 	
 	
 	@ManyToOne
-	User user;
+	Userx userx;
 }

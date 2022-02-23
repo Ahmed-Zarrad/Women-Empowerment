@@ -1,6 +1,6 @@
 package tn.esprit.Entity;
 
 public enum Status {
-	Accepted , Refused , Wating 
+	Accepted , Refused , Waiting
 
 }

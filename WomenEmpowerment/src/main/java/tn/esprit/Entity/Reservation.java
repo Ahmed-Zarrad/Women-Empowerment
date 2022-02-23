@@ -10,6 +10,7 @@ import java.io.Serializable;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Reservation implements Serializable  {
 	
 	/**
@@ -25,7 +26,7 @@ public class Reservation implements Serializable  {
 		@OneToOne (fetch = FetchType.EAGER)
 		private CharityEvent charityEvent;
 		@OneToOne
-		private User user;
+		private Userx userx;
 
 
 }
