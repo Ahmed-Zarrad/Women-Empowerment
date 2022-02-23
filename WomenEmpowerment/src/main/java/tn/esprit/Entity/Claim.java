@@ -19,6 +19,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Claim implements Serializable  {
 
 	/**
@@ -39,7 +40,7 @@ public class Claim implements Serializable  {
 		private Date DateClaim ;
 		@JsonIgnore
 		@ManyToOne
-        User user ;
+		Userx userx ;
 		
 		
 
