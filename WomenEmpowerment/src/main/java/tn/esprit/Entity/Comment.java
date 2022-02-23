@@ -14,6 +14,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Comment implements Serializable {
 	
 	
@@ -45,6 +46,6 @@ public class Comment implements Serializable {
 
 	@JsonIgnore
 	@ManyToOne
-	User user;
+	Userx userx;
 
 }

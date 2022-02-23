@@ -1,10 +1,7 @@
 package tn.esprit.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.List;
@@ -16,20 +13,23 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class JobOffre implements Serializable  {
-	
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY) 
 	
 	
-	private int idOffre;
+	private Integer idOffre;
 	private String TitleOffre ;
-	private float Salary ;
+	private Float Salary ;
 	private String offreDescription ;
 
 
 	@JsonIgnore
-	@OneToMany( mappedBy="JobOffres")
+	@OneToMany( mappedBy="JobOffre")
 	private List <Condidat> condidats;
 
 }
