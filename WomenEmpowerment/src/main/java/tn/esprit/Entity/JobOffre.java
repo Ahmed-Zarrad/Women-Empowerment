@@ -23,8 +23,8 @@ public class JobOffre implements Serializable  {
 	
 	
 	private Integer idOffre;
-	private String TitleOffre ;
-	private Float Salary ;
+	private String titleOffre ;
+	private Float salary ;
 	private String offreDescription ;
 
 

@@ -13,5 +13,4 @@ public class CondidatController {
     private CondidatService condidatService;
 
     // create
-    @RequestMapping(value = "/createCondidat", method = RequestMethod.POST)
 }
