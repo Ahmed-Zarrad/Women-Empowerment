@@ -29,7 +29,7 @@ public class JobOffre implements Serializable  {
 
 
 	@JsonIgnore
-	@OneToMany( mappedBy="JobOffre")
+	@OneToMany( mappedBy="jobOffre")
 	private List <Condidat> condidats;
 
 }

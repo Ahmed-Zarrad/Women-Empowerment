@@ -19,24 +19,23 @@ public class Condidat implements Serializable   {
 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id
-
 	private Long idCondidat ;
-	private  String FirstName ;
-	private String LastName ;
-	private Integer PhoneNumber ;
-	private String Email ;
+	private  String firstName ;
+	private String lastName ;
+	private Integer phoneNumber ;
+	private String email ;
 	private String password ;
-	private String Gender ;
-	private String Image ;
+	private String gender ;
+	private String image ;
 	@Temporal(TemporalType.DATE)
-	private Date BirthDate ;
+	private Date birthDate ;
 
-	private String Adress ;
+	private String adress ;
 	@Enumerated(EnumType.STRING)
 	private Status status;
 	@JsonIgnore
 	@ManyToOne (fetch = FetchType.EAGER)
-	JobOffre JobOffre ;
+	JobOffre jobOffre ;
 	@JsonIgnore
 	@ManyToOne
 	Userx userx ;
