@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import tn.esprit.Entity.Condidat;
 import tn.esprit.Entity.JobOffre;
 import tn.esprit.repository.CondidatRepository;
+import tn.esprit.repository.JobOffreRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +15,12 @@ public class CondidatService {
 
     @Autowired
     private CondidatRepository condidatRepository ;
+
+    @Autowired
+    private JobOffreRepository jobOffreRepository ;
+
+    @Autowired
+    private JobOffreService jobOffreService;
 
     // Create condidat
     public Condidat addCondidat(Condidat condidat){
@@ -33,5 +40,9 @@ public class CondidatService {
     public Optional<Condidat> getCondidatById(Long id){
         return condidatRepository.findById(id);
     }
+
+
+
+
 
 }

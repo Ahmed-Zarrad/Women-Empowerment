@@ -20,13 +20,11 @@ public class JobOffre implements Serializable  {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY) 
-	
-	
+
 	private Integer idOffre;
 	private String titleOffre ;
 	private Float salary ;
 	private String offreDescription ;
-
 
 	@JsonIgnore
 	@OneToMany( mappedBy="jobOffre")

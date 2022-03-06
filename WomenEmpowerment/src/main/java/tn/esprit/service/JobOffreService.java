@@ -52,6 +52,9 @@ public class JobOffreService {
 		return jobOffreRepository.findBySalaryLessThan(salary);
 	}
 
-	  
+	// Filtrage des candidatures
+	public void filterCandidat( Long id) {
+
+	}
 
 }

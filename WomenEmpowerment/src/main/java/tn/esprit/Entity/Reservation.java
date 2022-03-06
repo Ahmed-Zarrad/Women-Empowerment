@@ -20,7 +20,6 @@ public class Reservation implements Serializable  {
 		
 		@GeneratedValue(strategy=GenerationType.IDENTITY)
 		@Id
-		
 		private int idResevation;
 		
 		@OneToOne (fetch = FetchType.EAGER)

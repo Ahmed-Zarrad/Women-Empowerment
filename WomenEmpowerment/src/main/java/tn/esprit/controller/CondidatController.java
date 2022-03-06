@@ -68,6 +68,14 @@ public class CondidatController {
         return condidatService.getCondidatById(id).orElse(null);
     }
 
+    // apply for job offer
+    @RequestMapping(value = "/applyForJobOffer", method = RequestMethod.POST)
+    public void applyForJobOffer(@RequestBody Condidat condidat)
+    {
+        condidatService.addCondidat(condidat);
+    }
+
+
 
 
 

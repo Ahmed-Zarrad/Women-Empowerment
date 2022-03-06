@@ -31,19 +31,9 @@ public class Condidat implements Serializable   {
 	private Date birthDate ;
 
 	private String adress ;
-	@Enumerated(EnumType.STRING)
-	private Status status;
-	@JsonIgnore
+	private String status = Status.Waiting.toString();
 	@ManyToOne (fetch = FetchType.EAGER)
-	JobOffre jobOffre ;
-	@JsonIgnore
-	@ManyToOne
-	Userx userx ;
-
-	
-	
-	
-	
-	
+	@JoinColumn(name="idOffre", nullable=false)
+	private JobOffre jobOffre ;
 
 }

@@ -1,13 +1,12 @@
 package tn.esprit.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import tn.esprit.Entity.Condidat;
 import tn.esprit.Entity.JobOffre;
+import tn.esprit.Entity.Status;
+import tn.esprit.repository.CondidatRepository;
 import tn.esprit.repository.JobOffreRepository;
 import tn.esprit.service.JobOffreService;
 
@@ -22,8 +21,12 @@ public class JobOffreController {
 	@Autowired
 	private JobOffreRepository jobOffreRepository;
 
+	@Autowired
+	private CondidatRepository condidatRepository;
+
 	 // create
-	  @RequestMapping(value = "/CreateJoboffre", method = RequestMethod.POST)
+	  @PostMapping(value = "/CreateJoboffre")
+	  //@RequestMapping(value = "/CreateJoboffre", method = RequestMethod.POST)
 	  public JobOffre saveJoboffre(@RequestBody JobOffre jobOffre) {
 	    return jobOffreService.createJobOffre(jobOffre);
 	  }
@@ -78,6 +81,18 @@ public class JobOffreController {
 	@RequestMapping(value = "/jobOfferBySalaryLess", method = RequestMethod.GET)
 	public List<JobOffre> retrieveJobOfferBySalaryLess(@RequestParam(name = "salary") final Float salary) {
 		return jobOffreService.filterLessThanSalary(salary);
+	}
+
+	// Filtrage des candidatures
+	@RequestMapping(value = "/filterCondidat", method = RequestMethod.PUT)
+	public Condidat updateCondidat(
+			@RequestParam(name = "idCondidat") final Long idCondidat,
+			@RequestParam(name = "status") final String status) {
+
+		  Condidat con = condidatRepository.findById(idCondidat).orElse(null);
+		assert con != null;
+		con.setStatus(status);
+		  return condidatRepository.save(con);
 	}
 
 
