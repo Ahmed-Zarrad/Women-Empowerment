@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface MembershipRepository extends JpaRepository <Membership, Long>{
    // List<Membership> findByIdIn(List<Long> idMem);
-   // List<Membership> findMembershipByUserx_Id(Long idUser);
+   // List<Membership> findMembershipByappUser_Id(Long idUser);
 
 
 }

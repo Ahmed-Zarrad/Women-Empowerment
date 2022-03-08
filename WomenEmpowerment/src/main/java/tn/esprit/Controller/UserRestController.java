@@ -2,40 +2,41 @@ package tn.esprit.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.Entity.AppUser;
 import tn.esprit.Entity.Role;
-import tn.esprit.Entity.Userx;
-import tn.esprit.Service.UserService;
+import tn.esprit.Service.UserServiceImpl;
 
 import java.util.List;
 
 @RestController
 public class UserRestController {
 	@Autowired
-	UserService userService;
+	UserServiceImpl userService;
 	
 	@GetMapping("/retrieve-all-users")	
 	@ResponseBody
-	public List<Userx> getUsers(){
-		List<Userx> list = userService.retrieveAllUsers() ;
+	public List<AppUser> getUsers(){
+		List<AppUser> list = userService.retrieveAllUsers() ;
 		return list; 
 	}
 	@GetMapping("/retrieve-all-users/{user-idUser}")
 	@ResponseBody
-	public Userx retrieveUser(@PathVariable("user-idUser") Long userId) {
+	public AppUser retrieveUser(@PathVariable("user-idUser") Long userId) {
 		return userService.retrieveUser(userId);
 	}
 	 
 	@PostMapping("/add-user")
 	@ResponseBody
-	public Userx addUser (@RequestBody Userx u) {
-		Userx user = userService.addUser(u);
+	public AppUser addUser (@RequestBody AppUser u) {
+		AppUser user = userService.addUser(u);
 		return user;
 	}
+
 	
 	@PutMapping("/modify-user")
 	@ResponseBody
-	public Userx modifyUser(@RequestBody Userx user) {
-		return userService.updateUser(user);
+	public AppUser modifyUser(@RequestBody AppUser user) {
+		return userService.updateAppUser(user);
 	}
  
 	@DeleteMapping("/remove-user/{user-idUser}")
@@ -46,7 +47,7 @@ public class UserRestController {
 	 
 	@GetMapping("/retrieveUserByEmail/{email}")
 	@ResponseBody
-	public Userx retrieveUserByEmail (@PathVariable("email") String email) {
+	public AppUser retrieveUserByEmail (@PathVariable("email") String email) {
 		return userService.retrieveUserByEmail(email);
 	}
 	

@@ -26,7 +26,7 @@ public class Reservation implements Serializable  {
 		@OneToOne (fetch = FetchType.EAGER)
 		private CharityEvent charityEvent;
 		@OneToOne
-		private Userx userx;
+		private AppUser appUser;
 
 
 }

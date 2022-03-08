@@ -46,6 +46,6 @@ public class Comment implements Serializable {
 
 	@JsonIgnore
 	@ManyToOne
-	Userx userx;
+	AppUser appUser;
 
 }

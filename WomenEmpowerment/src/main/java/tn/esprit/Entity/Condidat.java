@@ -39,7 +39,7 @@ public class Condidat implements Serializable   {
 	JobOffre JobOffre ;
 	@JsonIgnore
 	@ManyToOne
-	Userx userx ;
+    AppUser appUser ;
 
 	
 	

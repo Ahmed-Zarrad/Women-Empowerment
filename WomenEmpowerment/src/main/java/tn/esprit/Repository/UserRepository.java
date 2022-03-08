@@ -5,23 +5,25 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import tn.esprit.Entity.Role;
-import tn.esprit.Entity.Userx;
+import tn.esprit.Entity.AppUser;
 
 import java.util.List;
 
 @Repository
-public interface UserRepository extends CrudRepository<Userx ,Long>  {
+public interface UserRepository extends CrudRepository<AppUser,Long>  {
 
 
-	@Query("FROM Userx u WHERE u.idUser = :idUser")
-	List<Userx> findUserByID(@Param(value = "idUser") Long idUser);
+	@Query("FROM AppUser u WHERE u.idUser = :idUser")
+	List<AppUser> findUserByID(@Param(value = "idUser") Long idUser);
 
-	@Query("FROM Userx u WHERE u.email = :email")
-	Userx findUserByemail(@Param(value = "email") String email);
+	@Query("FROM AppUser u WHERE u.email = :email")
+    AppUser findUserByemail(@Param(value = "email") String email);
 
 
-	@Query("FROM Userx u WHERE u.role = :role")
-	 List<Userx> findUserByRole(@Param(value = "role") Role role);
+	@Query("FROM AppUser u WHERE u.role = :role")
+	 List<AppUser> findUserByRole(@Param(value = "role") Role role);
+
+	AppUser findByEmail(String email);
 	
 }
 

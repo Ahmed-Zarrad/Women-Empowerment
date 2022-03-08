@@ -6,14 +6,14 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-
+import org.springframework.hateoas.RepresentationModel;
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Membership implements Serializable {
+public class Membership extends RepresentationModel<Membership> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idMem;
@@ -21,10 +21,11 @@ public class Membership implements Serializable {
     private String DescriptionMem;
     private Date StartDateMem;
     private String DurationMem;
-    private String QRCodeMem;
+    private String QRCodeMem ;
+    private byte[] base64QRCode;
 
     @JsonIgnore
     @OneToOne
-    private Userx userx;
+    private AppUser appUser;
 
 }
