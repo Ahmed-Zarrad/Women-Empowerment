@@ -14,6 +14,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Comment implements Serializable {
 	
 	
@@ -26,25 +27,25 @@ public class Comment implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id
 	
-	private int IdCom ;
+	private int idCom ;
 	
-	private int LikeNumber;
 	
-	private int DeslikeNumber ;
-	
-	private String DescriptionCom ;
+	private String descriptionCom ;
 
 	@Temporal(TemporalType.DATE)
-	private Date DateCom ;
+	private Date dateCom ;
 	
-	private Boolean State ;
+	private Boolean state ;
 
-	@JsonIgnore
-	@ManyToOne (fetch = FetchType.EAGER)
-	Subject subject;
+	
 
 	@JsonIgnore
 	@ManyToOne
-	User user;
+	Userx userx;
+	
+	
+	@JsonIgnore
+	@ManyToOne (fetch = FetchType.EAGER)
+	Subject subject;
 
 }

@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+
+
 import lombok.*;
 
 @Entity
@@ -13,7 +15,8 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User implements Serializable {
+@Builder
+public class Userx implements Serializable {
 
 	/**
 	 * 
@@ -46,25 +49,34 @@ public class User implements Serializable {
 
 		private Boolean active;
 		
-		@OneToMany(cascade = CascadeType.ALL , mappedBy="user")
+		@OneToMany(cascade = CascadeType.ALL , mappedBy="userx")
 
 		private List <Claim> claims;
 		
-		@OneToMany(cascade = CascadeType.ALL , mappedBy="user")
+		@OneToMany(cascade = CascadeType.ALL , mappedBy="userx")
 
 		private List <Appointement> Appointements;
 
-		@OneToOne(cascade=CascadeType.ALL , mappedBy = "user")
+		@OneToOne(cascade=CascadeType.ALL , mappedBy = "userx")
 
 		private Membership membership;
 
-		@OneToMany(cascade=CascadeType.ALL , mappedBy="user")
-		private List<Comment> comments;
+		
 
-		@OneToMany(cascade=CascadeType.ALL , mappedBy="user")
+		@OneToMany(cascade=CascadeType.ALL , mappedBy="userx")
 		private List<Publicity> publicitys;
 
-		@OneToOne(cascade=CascadeType.ALL , mappedBy = "user")
+		
+		//@JsonIgnore
+		@OneToOne(cascade=CascadeType.ALL , mappedBy = "userx")
 		private Reservation reservation;
+		
+		
+		
+		
+		
+		
+		@OneToMany(cascade=CascadeType.ALL , mappedBy="userx")
+		private List<Subject> subjects;
 
 }

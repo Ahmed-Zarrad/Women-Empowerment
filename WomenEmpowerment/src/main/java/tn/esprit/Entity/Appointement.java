@@ -20,6 +20,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Appointement implements Serializable {
 
 	/**
@@ -40,6 +41,6 @@ public class Appointement implements Serializable {
 	private String DescriptionApp ;
 	@JsonIgnore
 	@ManyToOne
-    User user;
+    Userx userx;
 	
 }

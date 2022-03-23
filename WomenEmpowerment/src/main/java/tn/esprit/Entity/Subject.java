@@ -1,5 +1,6 @@
 package tn.esprit.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Subject implements Serializable{
 	
 	
@@ -24,16 +26,31 @@ public class Subject implements Serializable{
 	@Id
 	
 	
-	private int IdSub ;
+	private int idSub ;
 	
-	private String TitleSub;
+	private String titleSub;
 	
-	private int StarsNumber;
+	private int starsNumber;
 	
-	private String Description;
+	private String description;
 	
+	
+	
+	
+	@JsonIgnore
 	@OneToMany(cascade=CascadeType.ALL , mappedBy="subject")
 	 private List<Comment> comments;
+	
+	
+	
+	
+	
+	
+	@JsonIgnore
+	@ManyToOne
+	private Userx userx;
+
+	
 	
 	
 
