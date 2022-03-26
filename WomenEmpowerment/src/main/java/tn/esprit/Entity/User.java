@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.*;
 
 @Entity
@@ -47,23 +49,20 @@ public class User implements Serializable {
 		private Boolean active;
 		
 		@OneToMany(cascade = CascadeType.ALL , mappedBy="user")
-
 		private List <Claim> claims;
-		
+		@JsonIgnore
 		@OneToMany(cascade = CascadeType.ALL , mappedBy="user")
-
 		private List <Appointement> Appointements;
-
+		@JsonIgnore
 		@OneToOne(cascade=CascadeType.ALL , mappedBy = "user")
-
 		private Membership membership;
-
+		@JsonIgnore
 		@OneToMany(cascade=CascadeType.ALL , mappedBy="user")
 		private List<Comment> comments;
-
+		@JsonIgnore
 		@OneToMany(cascade=CascadeType.ALL , mappedBy="user")
 		private List<Publicity> publicitys;
-
+		@JsonIgnore
 		@OneToOne(cascade=CascadeType.ALL , mappedBy = "user")
 		private Reservation reservation;
 

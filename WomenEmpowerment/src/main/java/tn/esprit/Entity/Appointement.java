@@ -14,8 +14,8 @@ import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
-
 @Entity
+@Builder
 @Getter
 @Setter
 @AllArgsConstructor
@@ -30,14 +30,14 @@ public class Appointement implements Serializable {
 		@Id
 	 
 	
-	private int IdApp;
+	private int idApp;
 	
 	@Temporal(TemporalType.DATE)
-	private Date DateApp ;
+	private Date dateApp ;
 	
-	private int UserNumApp;
+	private int userNumApp;
 	
-	private String DescriptionApp ;
+	private String descriptionApp ;
 	@JsonIgnore
 	@ManyToOne
     User user;

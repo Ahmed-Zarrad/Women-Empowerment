@@ -16,7 +16,11 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Membership implements Serializable {
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idMem;
     private String nameMem;
