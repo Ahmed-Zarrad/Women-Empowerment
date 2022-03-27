@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -30,10 +31,13 @@ public class Subject implements Serializable{
 	
 	private String titleSub;
 	
-	private int starsNumber;
+	
+	@Temporal(TemporalType.DATE)
+	private Date Datesub  ;
 	
 	private String description;
 	
+	private int starsNumberSubject ;
 	
 	
 	
