@@ -48,9 +48,15 @@ public interface ISubjectService {
       List<Subject> findByStarsNumberSubjectLessThan(int starsNumberSubject);
 
 	  
-      /*
+      
       List<Subject> retrievesuborderbystars();
-	 */
+	 
+      
+      
+      public int getmaxstarsNumberSubject();
+      
+      
+      
 	 
 	 
 	 

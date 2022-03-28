@@ -56,9 +56,20 @@ public interface SubjectRepository extends JpaRepository<Subject, Integer> {
 	List<Subject> findByStarsNumberSubjectLessThan(int starsNumberSubject);
 	
 	
-	/*
+	
 	@Query("SELECT s FROM Subject s ORDER BY s.starsNumberSubject DESC")
 	List<Subject> retrievesuborderbystars();
 	
-*/
+	
+
+	
+	@Query("SELECT MAX(b.starsNumberSubject) FROM Subject b")
+	public int getmaxstarsNumberSubject();
+	
+	
+	
+	
+	
+	
+	
 }

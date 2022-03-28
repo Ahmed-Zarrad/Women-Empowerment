@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import org.springframework.web.bind.annotation.RestController;
 
-
-
 import tn.esprit.Entity.Subject;
 import tn.esprit.Service.ISubjectService;
+
+
+
+
 
 
 @RestController
@@ -144,13 +146,20 @@ public class SubjectRestController {
 			return subrepo.findByStarsNumberSubjectLessThan(starsNumberSubject);
 			}
 			
-		/*	
+		
 			// http://localhost:8085/retrievesuborderbystars
 			
 			@GetMapping("/retrievesuborderbystars")
 			public List<Subject> retrievesuborderbystars() {
 			return subrepo.retrievesuborderbystars();
 			}
-	*/
+	
+			// http://localhost:8085/getmaxstarsNumberSubject
+			
+			
+			@GetMapping("/getmaxstarsNumberSubject")
+			public int getmaxstarsNumberSubject(){
+				return subrepo.getmaxstarsNumberSubject();
+			}
 	
 }

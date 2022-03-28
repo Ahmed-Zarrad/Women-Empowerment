@@ -6,8 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import tn.esprit.Entity.Subject;
 import tn.esprit.Entity.Userx;
+import tn.esprit.Repository.CommentRepository;
 import tn.esprit.Repository.SubjectRepository;
 import tn.esprit.Repository.UserxRepository;
 
@@ -21,6 +23,9 @@ public class SubjectServiceImpl implements ISubjectService {
 	
 	@Autowired
 	UserxRepository userxrepo;
+	
+	@Autowired
+	CommentRepository comrepo;
 
 
 	@Override
@@ -137,14 +142,25 @@ public class SubjectServiceImpl implements ISubjectService {
 		
 	}
 
-/*
+
 	@Override
+	public int getmaxstarsNumberSubject() {
+		return subrepo.getmaxstarsNumberSubject();
+	}
+
+
+	
+
+    @Override
 	public List<Subject> retrievesuborderbystars() {
 
 		return subrepo.retrievesuborderbystars();
 	}
 
-*/
+
+
+
+
 	
 
 	

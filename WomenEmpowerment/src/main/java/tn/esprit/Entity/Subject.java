@@ -1,6 +1,8 @@
 package tn.esprit.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 import lombok.*;
 
 import javax.persistence.*;
@@ -53,6 +55,14 @@ public class Subject implements Serializable{
 	@JsonIgnore
 	@ManyToOne
 	private Userx userx;
+	
+	
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="subject")
+	private List <Liking> likingSubject;
+	
+	
+	
 
 	
 	

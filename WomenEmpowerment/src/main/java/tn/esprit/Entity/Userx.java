@@ -78,5 +78,11 @@ public class Userx implements Serializable {
 		
 		@OneToMany(cascade=CascadeType.ALL , mappedBy="userx")
 		private List<Subject> subjects;
+		
+		
+		
+		
+		
+		
 
 }
