@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.Entity.Condidat;
 import tn.esprit.Entity.JobOffre;
+import tn.esprit.Entity.Status;
 import tn.esprit.repository.CondidatRepository;
 import tn.esprit.repository.JobOffreRepository;
 
@@ -41,6 +42,10 @@ public class CondidatService {
         return condidatRepository.findById(id);
     }
 
+    //filter condidats with status
+    public List<Condidat> getCondidatByStatus(String status){
+        return condidatRepository.findByStatusEquals(status);
+    }
 
 
 

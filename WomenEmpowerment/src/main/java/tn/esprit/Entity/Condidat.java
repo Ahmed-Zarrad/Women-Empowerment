@@ -2,6 +2,8 @@ package tn.esprit.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -33,7 +35,11 @@ public class Condidat implements Serializable   {
 	private String adress ;
 	private String status = Status.Waiting.toString();
 	@ManyToOne (fetch = FetchType.EAGER)
-	@JoinColumn(name="idOffre", nullable=false)
+	@NotFound(action = NotFoundAction.IGNORE)
+	@JoinColumn(name="idOffre",
+			insertable = false,
+			updatable = false,nullable = true
+	)
 	private JobOffre jobOffre ;
 
 }

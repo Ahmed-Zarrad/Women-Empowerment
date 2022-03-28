@@ -19,9 +19,9 @@ public class JobOffre implements Serializable  {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY) 
-
-	private Integer idOffre;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "offre_id", nullable = false)
+	private Integer offreId;
 	private String titleOffre ;
 	private Float salary ;
 	private String offreDescription ;

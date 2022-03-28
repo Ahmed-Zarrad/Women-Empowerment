@@ -75,6 +75,13 @@ public class CondidatController {
         condidatService.addCondidat(condidat);
     }
 
+    //filter condidats with status
+    @RequestMapping(value = "/filterCondidatStatus", method = RequestMethod.GET)
+    public List<Condidat> filterCondidatWithStatus(@RequestParam(name = "status") final String status)
+    {
+        return condidatService.getCondidatByStatus(status);
+    }
+
 
 
 
