@@ -15,7 +15,7 @@ public interface IMembershipService {
       Collection<Membership> findAll() ;
       Optional<Membership> findById(Long id);
      Membership saveOrUpdate(Membership membership);
-    public Membership addMembership2(Membership membership, Long idUser);
+    public Membership addMembership2(Membership membership, Integer idUser);
 
 
 

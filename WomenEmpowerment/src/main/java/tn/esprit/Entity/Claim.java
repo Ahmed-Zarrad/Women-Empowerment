@@ -3,8 +3,13 @@ package tn.esprit.Entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.*;
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
@@ -24,6 +29,7 @@ public class Claim implements Serializable  {
 		
 		@GeneratedValue(strategy=GenerationType.IDENTITY)
 		@Id
+		
 		private int IdClaim;
 		
 		private String TitleClaim;
@@ -34,7 +40,7 @@ public class Claim implements Serializable  {
 		private Date DateClaim ;
 		@JsonIgnore
 		@ManyToOne
-		AppUser appUser ;
+        AppUser appUser;
 		
 		
 

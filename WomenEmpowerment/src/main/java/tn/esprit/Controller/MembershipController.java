@@ -1,19 +1,23 @@
 package tn.esprit.Controller;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpStatus;
+
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.Entity.Membership;
 import tn.esprit.Service.IMembershipService;
 import tn.esprit.Service.UserServiceImpl;
-import tn.esprit.error.*;
-
-import java.util.*;
-
-import lombok.extern.slf4j.Slf4j;
+import tn.esprit.Exception.*;
 import tn.esprit.util.CodeQR;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @Slf4j
@@ -37,7 +41,7 @@ public class MembershipController {
 
 	@PostMapping("/add-membership/{idUser}")
 	@ResponseBody
-	public Membership  addMebership2 (@RequestBody Membership membership,@PathVariable ("idUser") Long idUser) {
+	public Membership  addMebership2 (@RequestBody Membership membership,@PathVariable ("idUser") Integer idUser) {
 		Membership listMemberships= membershipService.addMembership2(membership,idUser);
 		return listMemberships;
 	}

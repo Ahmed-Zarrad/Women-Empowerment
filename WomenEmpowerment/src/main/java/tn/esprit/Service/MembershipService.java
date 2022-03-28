@@ -6,12 +6,11 @@ import org.springframework.stereotype.Service;
 import tn.esprit.Entity.AppUser;
 import tn.esprit.Entity.Membership;
 import tn.esprit.Repository.MembershipRepository;
-import tn.esprit.Repository.UserRepository;
+import tn.esprit.Repository.IUserRepository;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -19,7 +18,7 @@ import java.util.UUID;
 public class MembershipService implements IMembershipService {
 
 	private MembershipRepository membershipRepository;
-	private UserRepository userRepository;
+	private IUserRepository userRepository;
 	@Override
 public List<Membership> getMemberships() {
 	
@@ -41,7 +40,7 @@ public List<Membership> getMemberships() {
 
 /*	public List<Membership>  listedeMemberships(Long idUser) {
 
-		return membershipRepository.findMembershipByappUser_Id(idUser);
+		return membershipRepository.findMembershipByuser_Id(idUser);
 	}*/
 @Override
 public Membership addMembership (Membership membership){
@@ -66,7 +65,7 @@ public Membership addMembership (Membership membership){
 
 	}
 	@Override
-	public Membership addMembership2(Membership membership, Long idUser) {
+	public Membership addMembership2(Membership membership, Integer idUser) {
 
 		Optional<AppUser>c=userRepository.findById(idUser);
 		AppUser u2=c.get();
@@ -76,9 +75,9 @@ public Membership addMembership (Membership membership){
 
 	/*public void ajouterETaffectermembership(Long idUser, long idMem){
 
-		AppUser user = membershipRepository.findById(idMem).orElse(null);
+		AppUser appUser = membershipRepository.findById(idMem).orElse(null);
 
-		AppUser user = userRepository.findById(idUser).orElse(null);
+		AppUser appUser = userRepository.findById(idUser).orElse(null);
 
 		se
 		}
