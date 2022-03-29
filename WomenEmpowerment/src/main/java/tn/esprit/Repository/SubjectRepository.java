@@ -25,7 +25,7 @@ public interface SubjectRepository extends JpaRepository<Subject, Integer> {
 	
 	Subject findBytitleSub(String titleSub);
 	
-	
+
 	List<Subject> findByUserx(Userx Userxx);
 	
 	

@@ -10,7 +10,9 @@ import tn.esprit.Entity.Comment;
 public interface ICommentService {
 	
 	
-	 int ajouterCommentaire(Comment c);
+	int addCommentaire(Comment c, int idS , int idU);
+	
+	// Comment affectercommentavecSubjectetUser(int idc, int idS, int idU);
 	 
 	 boolean deleteComment(int idCom);
 	 
@@ -27,5 +29,8 @@ public interface ICommentService {
 	 
 	 
 	// public void deleteAllComment(String title);
+	 
+	 
+	 
 
 }

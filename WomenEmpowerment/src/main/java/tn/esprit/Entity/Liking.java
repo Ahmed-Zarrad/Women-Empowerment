@@ -39,10 +39,12 @@ public class Liking implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	
-	private int idReact;
+	private String idReact;
 	
 	@Enumerated(EnumType.STRING)
 	private ReactType reactType;
+	
+	
 	
 	
 	

@@ -1,6 +1,8 @@
 package tn.esprit.Service;
 
 
+import java.util.List;
+
 import tn.esprit.Entity.Liking;
 
 public interface ILikeService {
@@ -17,6 +19,9 @@ public interface ILikeService {
 	
 	
 	public int getNombreLike(int idSubject);
+	
+	
+	
 	
 	
 	

@@ -61,11 +61,12 @@ public class SubjectRestController {
 		
 		}
 
-	// http://localhost:8085/update-subject
+	// http://localhost:8085/update-subject{id}
 	
-	@PutMapping("/update-subject")
-	public Subject updateSubject(@RequestBody Subject sub) {
-		return subrepo.updateSubject(sub);
+	@PutMapping("/update-subject/{id}")
+	public String updateSubject(@RequestBody Subject sub ,@PathVariable int id ) {
+			
+		return subrepo.updateSubject(sub, id);
 		}
 	
 	
@@ -161,5 +162,15 @@ public class SubjectRestController {
 			public int getmaxstarsNumberSubject(){
 				return subrepo.getmaxstarsNumberSubject();
 			}
-	
+			
+			
+			// http://localhost:8085/afficherSubjectspluscomment
+			
+			@GetMapping("/afficherSubjectspluscomment")
+			public List<Subject> afficherSubjectspluscomment(){
+				return subrepo.afficherSubjectspluscomment();
+			}
+			
+			
+			
 }

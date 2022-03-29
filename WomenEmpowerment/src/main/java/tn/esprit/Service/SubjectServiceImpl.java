@@ -1,7 +1,9 @@
 package tn.esprit.Service;
 
 import java.sql.Date;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,14 +70,17 @@ public class SubjectServiceImpl implements ISubjectService {
 		return false;
 	}
 	
-	
-	
-	@Override
-	public Subject updateSubject(Subject s) {
-		
-		return subrepo.save(s);
-	}
 
+	@Override
+	public String updateSubject(Subject s, int id) {
+		Userx xxx = userxrepo.findById(id).orElse(null);
+		   s.setUserx(xxx);
+		if (subrepo.findBytitleSub(s.getTitleSub()) != null){
+			
+			return "This Subject Exist";
+		}else
+			return (String) subrepo.save(s).toString().concat("\n Subject Added Succefully");
+	}
 	
 	
 	
@@ -156,6 +161,20 @@ public class SubjectServiceImpl implements ISubjectService {
 
 		return subrepo.retrievesuborderbystars();
 	}
+
+
+	@Override
+	public List<Subject> afficherSubjectspluscomment() {
+		List<Subject> Subjectss = subrepo.findAll();
+		Comparator<Subject> comp = (x, y) ->y.getComments().size()-x.getComments().size();
+		return Subjectss.stream().sorted(comp).collect(Collectors.toList());
+	}
+
+
+	
+	
+	
+	
 
 
 

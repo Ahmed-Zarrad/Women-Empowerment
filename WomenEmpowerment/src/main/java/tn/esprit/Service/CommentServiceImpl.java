@@ -1,13 +1,16 @@
 package tn.esprit.Service;
 
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.Entity.Comment;
 import tn.esprit.Entity.Subject;
+import tn.esprit.Entity.Userx;
 import tn.esprit.Repository.CommentRepository;
 import tn.esprit.Repository.SubjectRepository;
 import tn.esprit.Repository.UserxRepository;
@@ -29,43 +32,9 @@ public class CommentServiceImpl implements ICommentService {
 	
 	
 
-	@Override
-	public int ajouterCommentaire(Comment c) {
-		
-		
-		
-		
-		List<String> badwords=new ArrayList<>();
-		badwords.add("badbad");
-		badwords.add("badwords");
-		badwords.add("bads");
-		
-		String motcommentaire[]=c.getDescriptionCom().split(" ");
-		
-		
-		String com ="";
-		
-		for(String mots:motcommentaire){
-
-			
-			if (badwords.contains(mots)){
-			    mots="*****";
-				com=com+" "+mots;	
-			}
-		else
-			com=com+" "+mots;}
-		
-		c.setDescriptionCom(com);
-		
-		comrepo.save(c);
-		
-		return c.getIdCom();
 	
-		
-		
-	}
 
-
+	
 
 
 
@@ -109,6 +78,58 @@ public class CommentServiceImpl implements ICommentService {
 		 return comrepo.countcomment(title);
 		
 	}
+
+
+
+
+
+	@Override
+	public int addCommentaire(Comment c, int idS , int idU) {
+		
+         Subject subjectt = subrepo.findById(idS).orElse(null);
+		
+         Userx userx = userxrepo.findById(idU).orElse(null);
+         
+		List<String> badwords=new ArrayList<>();
+		badwords.add("badbad");
+		badwords.add("badwords");
+		badwords.add("bads");
+		String motcommentaire[]=c.getDescriptionCom().split(" ");
+		String com ="";
+		 
+	for(String mots:motcommentaire){
+
+		
+			if (badwords.contains(mots)){
+			    mots="*****";
+				com=com+" "+mots;	
+			}
+		else
+			com=com+" "+mots;}
+	 c.setDescriptionCom(com);
+	 c.setSubject(subjectt);
+	 c.setUserx(userx);
+	 comrepo.save(c);
+	return c.getIdCom();
+	}
+
+
+
+
+
+	
+
+
+	
+
+
+	
+
+
+
+
+
+
 
 
 

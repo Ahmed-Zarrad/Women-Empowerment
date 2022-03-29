@@ -32,16 +32,20 @@ public class CommentRestController {
 	
 	
 	
+	// http://localhost:8085/addCommentaire{idS}/{idU}
 	
-	// http://localhost:8085/add-comment
-	
-	@PostMapping("/add-comment/{Idsub}")
-	public ResponseEntity<?>ajouterCommentaire(@Validated @RequestBody Comment c){
-		comserv.ajouterCommentaire(c);
-		return 	ResponseEntity.ok().body(c);
+	@PostMapping("/addCommentaire/{idS}/{idU}")
+		public ResponseEntity<?>addCommentaire( @Validated @RequestBody Comment c,@PathVariable int idS ,@PathVariable int idU){
+			comserv.addCommentaire(c , idS , idU);
+			return 	ResponseEntity.ok().body(c);
 	
 	}
 	
+	
+	
+	
+	
+
 	
 	
 	// http://localhost:8085/deleteComment/{idCom}

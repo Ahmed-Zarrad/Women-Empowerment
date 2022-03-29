@@ -18,7 +18,7 @@ public interface ISubjectService {
 	 
 	 boolean deleteSubject(int IdSub);
 	 
-	 Subject updateSubject(Subject s);
+	 String updateSubject(Subject s , int id);
 	 
 	 
 	 List<Subject> retrieveAllSubject();
@@ -54,6 +54,10 @@ public interface ISubjectService {
       
       
       public int getmaxstarsNumberSubject();
+      
+      
+      
+      List<Subject> afficherSubjectspluscomment();
       
       
       
