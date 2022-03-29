@@ -1,12 +1,12 @@
 package tn.esprit.Entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-
-import java.io.Serializable;
-import java.util.Date;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -19,32 +19,25 @@ public class Condidat implements Serializable   {
 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id
-
 	private Long idCondidat ;
-	private  String FirstName ;
-	private String LastName ;
-	private Integer PhoneNumber ;
-	private String Email ;
+	private  String username ;
+	private String lastName ;
+	private Integer phoneNumber ;
+	private String email ;
 	private String password ;
-	private String Gender ;
-	private String Image ;
+	private String gender ;
+	private String image ;
 	@Temporal(TemporalType.DATE)
-	private Date BirthDate ;
+	private Date birthDate ;
 
-	private String Adress ;
-	@Enumerated(EnumType.STRING)
-	private Status status;
-	@JsonIgnore
+	private String adress ;
+	private String status = Status.Waiting.toString();
 	@ManyToOne (fetch = FetchType.EAGER)
-	JobOffre JobOffre ;
-	@JsonIgnore
-	@ManyToOne
-	Userx userx ;
-
-	
-	
-	
-	
-	
+	@NotFound(action = NotFoundAction.IGNORE)
+	@JoinColumn(name="idOffre",
+			insertable = false,
+			updatable = false,nullable = true
+	)
+	private JobOffre jobOffre ;
 
 }
