@@ -3,6 +3,7 @@ package tn.esprit.Entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -13,7 +14,8 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User implements Serializable {
+@Builder
+public class Userx implements Serializable {
 
 	/**
 	 * 
@@ -46,25 +48,24 @@ public class User implements Serializable {
 
 		private Boolean active;
 		
-		@OneToMany(cascade = CascadeType.ALL , mappedBy="user")
+		@OneToMany(cascade = CascadeType.ALL , mappedBy="userx")
 
 		private List <Claim> claims;
 		
-		@OneToMany(cascade = CascadeType.ALL , mappedBy="user")
+		@OneToMany(cascade = CascadeType.ALL , mappedBy="userx")
 
 		private List <Appointement> Appointements;
 
-		@OneToOne(cascade=CascadeType.ALL , mappedBy = "user")
+		@OneToOne(cascade=CascadeType.ALL , mappedBy = "userx")
 
 		private Membership membership;
 
-		@OneToMany(cascade=CascadeType.ALL , mappedBy="user")
+		@OneToMany(cascade=CascadeType.ALL , mappedBy="userx")
 		private List<Comment> comments;
+		
+		@ManyToMany(mappedBy="users", cascade = CascadeType.ALL)
+		private Set<CharityEvent> events;
 
-		@OneToMany(cascade=CascadeType.ALL , mappedBy="user")
-		private List<Publicity> publicitys;
-
-		@OneToOne(cascade=CascadeType.ALL , mappedBy = "user")
-		private Reservation reservation;
-
+		
+		
 }
