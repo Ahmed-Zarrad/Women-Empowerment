@@ -29,7 +29,7 @@ public class CharityEvent {
 	
 	
 	@ManyToMany(cascade = CascadeType.ALL)
-	private Set<AppUser> users;
+	private Set<AppUser> appUsers;
 	
 
 	@OneToOne

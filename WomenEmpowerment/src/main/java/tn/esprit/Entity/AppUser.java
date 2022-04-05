@@ -67,8 +67,9 @@ public class AppUser implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "appUser")
 	private List<Publicity> publicitys;
 	@JsonIgnore
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "appUser")
-	private Reservation reservation;
+	@ManyToMany(mappedBy="appUsers", cascade = CascadeType.ALL)
+	private Set<CharityEvent> events;
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL)
 	private Set<ImageUser> ImageUser1;
 
@@ -281,12 +282,12 @@ public class AppUser implements Serializable {
 		this.publicitys = publicitys;
 	}
 
-	public Reservation getReservation() {
-		return reservation;
+	public Set<CharityEvent> getEvents() {
+		return events;
 	}
 
-	public void setReservation(Reservation reservation) {
-		this.reservation = reservation;
+	public void setEvents(Set<CharityEvent> events) {
+		this.events = events;
 	}
 
 	public Set<ImageUser> getImageUser1() {
@@ -304,12 +305,13 @@ public class AppUser implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AppUser(int idUser, Role role, String username, String lastNameUser, String password, String confirmPasswordUser,
-				   boolean stateUser, int phoneNumberUser, String adressUser, Date birthDateUser, String email,
-				   Gender gender, boolean accountNonLocked, int failedAttempt, Date lockTime, String resettoken,
-				   boolean isBlocked, LocalDate blockDate, LocalDate unBlockDate, boolean avilaibility, String fileName,
-				   List<Claim> claims, List<Appointement> appointements, Membership membership, List<Comment> comments,
-				   List<Publicity> publicitys, Reservation reservation, Set<ImageUser> imageUser1) {
+	public AppUser(int idUser, Role role, String username, String lastNameUser, String password,
+				   String confirmPasswordUser, boolean stateUser, int phoneNumberUser, String adressUser,
+				   Date birthDateUser, String email, Gender gender, boolean accountNonLocked, int failedAttempt,
+				   Date lockTime, String resettoken, boolean isBlocked, LocalDate blockDate, LocalDate unBlockDate,
+				   boolean avilaibility, String fileName, List<Claim> claims, List<Appointement> appointements,
+				   Membership membership, List<Comment> comments, List<Publicity> publicitys, Set<CharityEvent> events,
+				   Set<ImageUser> imageUser1) {
 		this.idUser = idUser;
 		this.role = role;
 		this.username = username;
@@ -331,13 +333,13 @@ public class AppUser implements Serializable {
 		this.unBlockDate = unBlockDate;
 		this.avilaibility = avilaibility;
 		this.fileName = fileName;
-		//this.claims = claims;
-		//Appointements = appointements;
-		//this.membership = membership;
-		//this.comments = comments;
-		//this.publicitys = publicitys;
-		//this.reservation = reservation;
-		//ImageUser1 = imageUser1;
+		this.claims = claims;
+		Appointements = appointements;
+		this.membership = membership;
+		this.comments = comments;
+		this.publicitys = publicitys;
+		this.events = events;
+		ImageUser1 = imageUser1;
 	}
 
 	public AppUser(Role role, String username, String lastNameUser, String password, String confirmPasswordUser,
