@@ -72,13 +72,18 @@ public class User implements Serializable {
 	private List<Comment> comments;
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	private List<Liking> likings;
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	private List<Subject> subjects;
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private List<Publicity> publicitys;
 	@JsonIgnore
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
-	private Reservation reservation;
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "users")
+	private List<CharityEvent> charityEvents;
 	@OneToMany(cascade = CascadeType.ALL)
 	private Set<ImageUser> ImageUser1;
-
 
 	public int getIdUser() {
 		return idUser;
@@ -320,6 +325,22 @@ public class User implements Serializable {
 		this.comments = comments;
 	}
 
+	public List<Liking> getLikings() {
+		return likings;
+	}
+
+	public void setLikings(List<Liking> likings) {
+		this.likings = likings;
+	}
+
+	public List<Subject> getSubjects() {
+		return subjects;
+	}
+
+	public void setSubjects(List<Subject> subjects) {
+		this.subjects = subjects;
+	}
+
 	public List<Publicity> getPublicitys() {
 		return publicitys;
 	}
@@ -328,12 +349,12 @@ public class User implements Serializable {
 		this.publicitys = publicitys;
 	}
 
-	public Reservation getReservation() {
-		return reservation;
+	public List<CharityEvent> getCharityEvents() {
+		return charityEvents;
 	}
 
-	public void setReservation(Reservation reservation) {
-		this.reservation = reservation;
+	public void setCharityEvents(List<CharityEvent> charityEvents) {
+		this.charityEvents = charityEvents;
 	}
 
 	public Set<ImageUser> getImageUser1() {
@@ -347,27 +368,7 @@ public class User implements Serializable {
 	public User() {
 	}
 
-	public User(String username, String lastNameUser, String cinUser, String password, String confirmPasswordUser, boolean stateUser, String phoneNumberUser, String adressUser, String emailUser, SexeType sexeUser, boolean accountNonLocked, int failedAttempt, boolean isBlocked, boolean isPrivate, boolean avilaibility, ZoneMap zone, Role role) {
-		this.username = username;
-		this.lastNameUser = lastNameUser;
-		this.cinUser = cinUser;
-		this.password = password;
-		this.confirmPasswordUser = confirmPasswordUser;
-		this.stateUser = stateUser;
-		this.phoneNumberUser = phoneNumberUser;
-		this.adressUser = adressUser;
-		this.emailUser = emailUser;
-		this.sexeUser = sexeUser;
-		this.accountNonLocked = accountNonLocked;
-		this.failedAttempt = failedAttempt;
-		this.isBlocked = isBlocked;
-		this.isPrivate = isPrivate;
-		this.avilaibility = avilaibility;
-		this.zone = zone;
-		this.role = role;
-	}
-
-	public User(int idUser, String username, String lastNameUser, String cinUser, String password, String confirmPasswordUser, boolean stateUser, String phoneNumberUser, String adressUser, Date birthDateUser, String emailUser, SexeType sexeUser, boolean accountNonLocked, int failedAttempt, Date lockTime, String resetPasswordToken, boolean isBlocked, LocalDate blockDate, LocalDate unBlockDate, boolean isPrivate, float salaire, int pointnumber, boolean avilaibility, ZoneMap zone, Role role, String fileName, List<Claim> claims, List<Appointement> appointements, Membership membership, List<Comment> comments, List<Publicity> publicitys, Reservation reservation, Set<ImageUser> imageUser1) {
+	public User(int idUser, String username, String lastNameUser, String cinUser, String password, String confirmPasswordUser, boolean stateUser, String phoneNumberUser, String adressUser, Date birthDateUser, String emailUser, SexeType sexeUser, boolean accountNonLocked, int failedAttempt, Date lockTime, String resetPasswordToken, boolean isBlocked, LocalDate blockDate, LocalDate unBlockDate, boolean isPrivate, float salaire, int pointnumber, boolean avilaibility, ZoneMap zone, Role role, String fileName, List<Claim> claims, List<Appointement> appointements, Membership membership, List<Comment> comments, List<Liking> likings, List<Subject> subjects, List<Publicity> publicitys, List<CharityEvent> charityEvents, Set<ImageUser> imageUser1) {
 		this.idUser = idUser;
 		this.username = username;
 		this.lastNameUser = lastNameUser;
@@ -398,9 +399,31 @@ public class User implements Serializable {
 		Appointements = appointements;
 		this.membership = membership;
 		this.comments = comments;
+		this.likings = likings;
+		this.subjects = subjects;
 		this.publicitys = publicitys;
-		this.reservation = reservation;
+		this.charityEvents = charityEvents;
 		ImageUser1 = imageUser1;
+	}
+
+	public User(String username, String lastNameUser, String cinUser, String password, String confirmPasswordUser, boolean stateUser, String phoneNumberUser, String adressUser, String emailUser, SexeType sexeUser, boolean accountNonLocked, int failedAttempt, boolean isBlocked, boolean isPrivate, boolean avilaibility, ZoneMap zone, Role role) {
+		this.username = username;
+		this.lastNameUser = lastNameUser;
+		this.cinUser = cinUser;
+		this.password = password;
+		this.confirmPasswordUser = confirmPasswordUser;
+		this.stateUser = stateUser;
+		this.phoneNumberUser = phoneNumberUser;
+		this.adressUser = adressUser;
+		this.emailUser = emailUser;
+		this.sexeUser = sexeUser;
+		this.accountNonLocked = accountNonLocked;
+		this.failedAttempt = failedAttempt;
+		this.isBlocked = isBlocked;
+		this.isPrivate = isPrivate;
+		this.avilaibility = avilaibility;
+		this.zone = zone;
+		this.role = role;
 	}
 
 	public User(String email, String password) {

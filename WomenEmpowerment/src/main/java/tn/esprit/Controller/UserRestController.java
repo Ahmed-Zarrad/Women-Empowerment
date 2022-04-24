@@ -60,8 +60,8 @@ public class UserRestController {
 	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
 	@DeleteMapping("/delete-user/{idUser}")
 	@ResponseBody
-	public void deleteUser(@PathVariable("idUser") int userId) {
-	us.deleteUser(userId);
+	public void deleteUser(@PathVariable("idUser") int idUser) {
+	us.deleteUser(idUser);
 	}
 	
 	// http://localhost:9091/SpringMVC/servlet/update-user
@@ -83,8 +83,8 @@ public class UserRestController {
 	// http://localhost:9091/SpringMVC/servlet/retrieve-user-by-id/{user-id}
 	@GetMapping("/retrieve-user-by-id/{user-id}")
 	@ResponseBody
-	public User retrieveUserById(@PathVariable("user-id") int userId) {
-	return us.retrieveUserById(userId);
+	public User retrieveUserById(@PathVariable("user-id") int idUser) {
+	return us.retrieveUserById(idUser);
 	}
 	
 	// http://localhost:9091/SpringMVC/servlet/retrieve-user-by-point/{user-point}
