@@ -2,7 +2,7 @@ package tn.esprit.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tn.esprit.Entity.AppUser;
+import tn.esprit.Entity.User;
 import tn.esprit.Entity.Subject;
 import tn.esprit.Repository.CommentRepository;
 import tn.esprit.Repository.SubjectRepository;
@@ -22,7 +22,7 @@ public class SubjectServiceImpl implements ISubjectService {
 	SubjectRepository subrepo;
 	
 	@Autowired
-	IUserRepository appUserrepo;
+	IUserRepository userrepo;
 	
 	@Autowired
 	CommentRepository comrepo;
@@ -30,8 +30,8 @@ public class SubjectServiceImpl implements ISubjectService {
 
 	@Override
 	public void addSubject(Subject subjects, int Id) {
-		AppUser appUser = appUserrepo.findById(Id).orElse(null);
-		subjects.setAppUser(appUser);
+		User user = userrepo.findById(Id).orElse(null);
+		subjects.setUser(user);
         subrepo.save(subjects);
 		
 	}
@@ -39,8 +39,8 @@ public class SubjectServiceImpl implements ISubjectService {
 	
 	@Override
 	public String aaaddSubject(Subject s, int Id) {
-		AppUser xxx = appUserrepo.findById(Id).orElse(null);
-		   s.setAppUser(xxx);
+		User xxx = userrepo.findById(Id).orElse(null);
+		   s.setUser(xxx);
 		if (subrepo.findBytitleSub(s.getTitleSub()) != null){
 			
 			return "This Subject Exist";
@@ -71,8 +71,8 @@ public class SubjectServiceImpl implements ISubjectService {
 
 	@Override
 	public String updateSubject(Subject s, int id) {
-		AppUser xxx = appUserrepo.findById(id).orElse(null);
-		   s.setAppUser(xxx);
+		User xxx = userrepo.findById(id).orElse(null);
+		   s.setUser(xxx);
 		if (subrepo.findBytitleSub(s.getTitleSub()) != null){
 			
 			return "This Subject Exist";
@@ -97,9 +97,9 @@ public class SubjectServiceImpl implements ISubjectService {
 
 
 	@Override
-	public List<Subject> listeSubjectByAppUser(int Id) {
-		AppUser appAppUser = appUserrepo.findById(Id).orElse(null);
-		return subrepo.findByAppUser(appAppUser);
+	public List<Subject> listeSubjectByUser(int Id) {
+		User user = userrepo.findById(Id).orElse(null);
+		return subrepo.findByUser(user);
 		
 	}
 

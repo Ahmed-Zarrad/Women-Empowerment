@@ -25,7 +25,7 @@ public interface ISubjectService {
       Subject  retrievesubject(String titleSub);
       
       
-      List<Subject> listeSubjectByAppUser(int Id);
+      List<Subject> listeSubjectByUser(int Id);
       
      
       List<Subject> getAllSubjectbyId(int Iduser);

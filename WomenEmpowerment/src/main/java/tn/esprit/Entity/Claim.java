@@ -40,7 +40,7 @@ public class Claim implements Serializable  {
 		private Date DateClaim ;
 		@JsonIgnore
 		@ManyToOne
-        AppUser appUser;
+        User user;
 		@ManyToOne
 		CategoryClaim categoryclaim ;
 		

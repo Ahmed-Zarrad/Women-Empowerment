@@ -11,7 +11,7 @@ public class JwtResponse implements Serializable {
 	private static final long serialVersionUID = -8091879091924046844L;
 	private String jwttoken;
 	private String type = "Bearer";
-	private String email ;
+	private String username ;
 	private Collection<? extends GrantedAuthority> authorities;
 	
 	
@@ -22,9 +22,9 @@ public class JwtResponse implements Serializable {
 	}
 
 
-	public JwtResponse(String jwttoken, String email, Collection<? extends GrantedAuthority> collection) {
+	public JwtResponse(String jwttoken, String username, Collection<? extends GrantedAuthority> collection) {
 		this.jwttoken = jwttoken;
-		this.email = email;
+		this.username = username;
 		this.authorities = collection;
 	}
 
@@ -49,13 +49,13 @@ public class JwtResponse implements Serializable {
 	}
 
 
-	public String getEmail() {
-		return email;
+	public String getUsername() {
+		return username;
 	}
 
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 

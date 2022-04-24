@@ -41,6 +41,6 @@ public class Appointement implements Serializable {
 	private String DescriptionApp ;
 	@JsonIgnore
 	@ManyToOne
-	AppUser appUser;
+	User user;
 	
 }

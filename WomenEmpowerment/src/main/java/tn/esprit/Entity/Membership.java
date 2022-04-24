@@ -26,6 +26,6 @@ public class Membership extends RepresentationModel<Membership> implements Seria
 
     @JsonIgnore
     @OneToOne
-    private AppUser appUser;
+    private User user;
 
 }

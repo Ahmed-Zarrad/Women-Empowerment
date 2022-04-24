@@ -1,5 +1,5 @@
 package tn.esprit.Entity;
 
 public enum Role {
-    ADMINISTRATOR,Member
+    ADMINISTRATOR,CLIENT
 }

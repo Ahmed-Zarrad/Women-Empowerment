@@ -12,7 +12,7 @@ public interface LikeRepository extends JpaRepository<Liking, Integer > {
 	
 	
 	
-	@Query("SELECT COUNT(l) from Liking l WHERE l.appUser.idUser =:idUser and l.subject.idSub =:idSubject")
+	@Query("SELECT COUNT(l) from Liking l WHERE l.user.idUser =:idUser and l.subject.idSub =:idSubject")
 	public int isLikeExists(@Param("idUser") int idUser,@Param("idSubject") int idSubject);
 
 	

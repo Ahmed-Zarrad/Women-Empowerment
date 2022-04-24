@@ -8,20 +8,20 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @Entity
-@Table(name = "IMAGE_USER")
-public class ImageUser implements MultipartFile {
+@Table(name = "CV")
+public class Cv implements MultipartFile {
 	
 	private static long SerialVersionUID=1L;
 	
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private int idImageUser ;
-	private String nameImageUser;
+	private int idCv ;
+	private String nameCv;
 	@Lob
 	private byte[] data;
 	
 	@ManyToOne
-    User user;
+    Condidat condidat;
 
 	@Override
 	public String getName() {
@@ -71,20 +71,20 @@ public class ImageUser implements MultipartFile {
 		
 	}
 
-	public int getIdImageUser() {
-		return idImageUser;
+	public int getIdCv() {
+		return idCv;
 	}
 
-	public void setIdImageUser(int idImageUser) {
-		this.idImageUser = idImageUser;
+	public void setIdCv(int idCv) {
+		this.idCv = idCv;
 	}
 
-	public String getNameImageUser() {
-		return nameImageUser;
+	public String getNameCv() {
+		return nameCv;
 	}
 
-	public void setNameImageUser(String nameImageUser) {
-		this.nameImageUser = nameImageUser;
+	public void setNameCv(String nameCv) {
+		this.nameCv = nameCv;
 	}
 
 	public byte[] getData() {
@@ -95,53 +95,53 @@ public class ImageUser implements MultipartFile {
 		this.data = data;
 	}
 
-	public User getUser() {
-		return user;
+	public Condidat getUser() {
+		return condidat;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUser(Condidat condidat) {
+		this.condidat = condidat;
 	}
 
-	public ImageUser() {
+	public Cv() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
 	
 
-	public ImageUser(String nameImageUser, String contenttype, byte[] data) {
+	public Cv(String nameCv, String contenttype, byte[] data) {
 		super();
-		this.nameImageUser = nameImageUser;
+		this.nameCv = nameCv;
 		this.getContentType();
 		this.data = data;
 	}
 
-	public ImageUser(int idImageUser, String nameImageUser, byte[] data, User user) {
+	public Cv(int idCv, String nameCv, byte[] data, Condidat condidat) {
 		super();
-		this.idImageUser = idImageUser;
-		this.nameImageUser = nameImageUser;
+		this.idCv = idCv;
+		this.nameCv = nameCv;
 		this.data = data;
-		this.user = user;
+		this.condidat = condidat;
 	}
 
-	public ImageUser(String nameImageUser, byte[] data, User user) {
+	public Cv(String nameCv, byte[] data, Condidat condidat) {
 		super();
-		this.nameImageUser = nameImageUser;
+		this.nameCv = nameCv;
 		this.data = data;
-		this.user = user;
+		this.condidat = condidat;
 	}
 
-	public ImageUser(int idImageUser, String nameImageUser, byte[] data) {
+	public Cv(int idCv, String nameCv, byte[] data) {
 		super();
-		this.idImageUser = idImageUser;
-		this.nameImageUser = nameImageUser;
+		this.idCv = idCv;
+		this.nameCv = nameCv;
 		this.data = data;
 	}
 
-	public ImageUser(String nameImageUser, byte[] data) {
+	public Cv(String nameCv, byte[] data) {
 		super();
-		this.nameImageUser = nameImageUser;
+		this.nameCv = nameCv;
 		this.data = data;
 	}
 	

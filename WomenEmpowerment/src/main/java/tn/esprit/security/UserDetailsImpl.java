@@ -4,7 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import tn.esprit.Entity.AppUser;
+import tn.esprit.Entity.User;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,24 +15,24 @@ import java.util.Objects;
 public class UserDetailsImpl implements UserDetails {
 	
 	private static final long serialVersionUID = 1L;
-	AppUser appuser;
+	User user;
 
 	private Collection<? extends GrantedAuthority> authorities;
 
-	public UserDetailsImpl(AppUser appuser,
+	public UserDetailsImpl(User user,
 			Collection<? extends GrantedAuthority> authorities) {
-		this.appuser = appuser;
+		this.user = user;
 		this.authorities = authorities;
 	}
 	
 	public UserDetailsImpl() {
 	}
 
-	public static UserDetailsImpl build(AppUser appuser) {
+	public static UserDetailsImpl build(User user) {
 		List<GrantedAuthority> authorities = new ArrayList<>();
-		authorities.add(new SimpleGrantedAuthority(appuser.getRole().toString()));
+		authorities.add(new SimpleGrantedAuthority(user.getRole().toString()));
 
-		return new UserDetailsImpl(appuser,
+		return new UserDetailsImpl(user, 
 				authorities);
 	}
 
@@ -46,8 +46,8 @@ public class UserDetailsImpl implements UserDetails {
 		return true;
 	}
 	
-	public AppUser getAppUser () throws Exception {
-		return appuser;
+	public User getUser () throws Exception {
+		return user;
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class UserDetailsImpl implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		try {
-			return appuser.isStateUser();
+			return user.isStateUser();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -72,13 +72,13 @@ public class UserDetailsImpl implements UserDetails {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		UserDetailsImpl user1 = (UserDetailsImpl) o;
-		return Objects.equals(appuser, user1);
+		return Objects.equals(user, user1);
 	}
 
 	@Override
 	public String getPassword() {
 		// TODO Auto-generated method stub
-		return appuser.getPassword();
+		return user.getPassword();
 	}
 	
 	
@@ -86,7 +86,7 @@ public class UserDetailsImpl implements UserDetails {
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return appuser.getEmail();
+		return user.getUsername();
 	}
 
 	@Override

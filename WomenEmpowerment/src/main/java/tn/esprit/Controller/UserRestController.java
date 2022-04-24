@@ -11,8 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import tn.esprit.Entity.AppUser;
 import tn.esprit.Entity.Role;
+import tn.esprit.Entity.User;
 import tn.esprit.Repository.IUserRepository;
 import tn.esprit.Response.Response;
 import tn.esprit.Service.IUserService;
@@ -23,11 +23,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins="http://localhost:4200")
 public class UserRestController {
 
 	@Autowired
@@ -38,30 +37,26 @@ public class UserRestController {
 	
 	@Autowired
 	ServletContext context;
-
-	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
-	@PostMapping("/add-admin")
-	@ResponseBody
-	public ResponseEntity<?> addAdmin (@RequestBody AppUser admin) {
-		return us.addAdmin(admin);
-	}
-
-	@PostMapping("/add-member")
-	@ResponseBody
-	public ResponseEntity<?> addMember (@RequestBody AppUser member) {
-		return us.addMember(member);
-
-	}
-
+	
+	// http://localhost:9091/SpringMVC/servlet/add-user
+	//@PreAuthorize("hasAuthority('ADMINISTRATOR')")
 	@PostMapping("/add-user")
 	@ResponseBody
-	public void save (@RequestBody AppUser appUser) {
-		 us.save(appUser);
-
+	public ResponseEntity<?> addUser(@RequestBody User user) {
+		return us.addUser(user);
+	
+	}
+	
+	// http://localhost:9091/SpringMVC/servlet/add-user
+	//@PreAuthorize("hasAuthority('ADMINISTRATOR')")
+	@PostMapping("/ajouter-user")
+	@ResponseBody
+	public ResponseEntity<?> ajouterUser(@RequestBody User user) {
+	ResponseEntity<?> u = us.ajouterUser(user);
+	return u;
 	}
 
-
-	// http://localhost:9091/SpringMVC/servlet/delete-user/{appUser-id}
+	// http://localhost:9091/SpringMVC/servlet/delete-user/{user-id}
 	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
 	@DeleteMapping("/delete-user/{idUser}")
 	@ResponseBody
@@ -72,105 +67,134 @@ public class UserRestController {
 	// http://localhost:9091/SpringMVC/servlet/update-user
 	@PutMapping("/update-user")
 	@ResponseBody
-	public AppUser updateUser(@RequestBody AppUser appUser) throws Exception {
-	return us.updateUser(appUser);
+	public User updateUser(@RequestBody User user) throws Exception {
+	return us.updateUser(user);
 	}
 	
 	// http://localhost:9091/SpringMVC/servlet/retrieve-all-user
 	//@PreAuthorize("hasAuthority('ADMINISTRATOR')")
 	@GetMapping("/retrieve-all-user")
 	@ResponseBody
-	public List<AppUser> getUser() {
-	List<AppUser> appUsers = us.retrieveAllUsers();
-	return appUsers;
+	public List<User> getUser() {
+	List<User> users = us.retrieveAllUsers();
+	return users;
 	}
 			
-	// http://localhost:9091/SpringMVC/servlet/retrieve-user-by-id/{appUser-id}
+	// http://localhost:9091/SpringMVC/servlet/retrieve-user-by-id/{user-id}
 	@GetMapping("/retrieve-user-by-id/{user-id}")
 	@ResponseBody
-	public AppUser retrieveUserById(@PathVariable("user-id") int userId) {
+	public User retrieveUserById(@PathVariable("user-id") int userId) {
 	return us.retrieveUserById(userId);
 	}
 	
-
+	// http://localhost:9091/SpringMVC/servlet/retrieve-user-by-point/{user-point}
+	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
+	@GetMapping("/retrieve-user-by-point/{user-point}")
+	@ResponseBody
+	public List<User> retrieveUsertByPoint(@PathVariable("user-point") int pointNumber) {
+	return us.retrieveUserByPoint(pointNumber);
+	}
 	
-	// http://localhost:9091/SpringMVC/servlet/retrieve-member-by-username/{appUser-username}
+	// http://localhost:9091/SpringMVC/servlet/retrieve-client-by-username/{user-username}
 	@GetMapping("/retrieve-user-by-username/{user-username}")
 	@ResponseBody
-	public AppUser retrieveUserByUsername(@PathVariable("user-username") String username) {
+	public User retrieveUserByFirstName(@PathVariable("user-username") String username) {
 	return us.retrieveUserByUsername(username);
 	}
 	
-	// http://localhost:9091/SpringMVC/servlet/retrieve-user-by-state/{appUser-state}
+	// http://localhost:9091/SpringMVC/servlet/retrieve-user-by-state/{user-state}
 	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
 	@GetMapping("/retrieve-user-by-state/{user-state}")
 	@ResponseBody
-	public List<AppUser> retrieveUserByState(@PathVariable("user-state") boolean stateUser) {
+	public List<User> retrieveUserByState(@PathVariable("user-state") boolean stateUser) {
 	return us.retrieveUserByState(stateUser);
 	}	
 	
-	// http://localhost:9091/SpringMVC/servlet/retrieve-user-by-adress/{appUser-adress}
+	// http://localhost:9091/SpringMVC/servlet/retrieve-user-by-adress/{user-adress}
 	@GetMapping("/retrieve-user-by-adress/{user-adress}")
 	@ResponseBody
-	public List<AppUser> retrieveUserByAdress(@PathVariable("user-adress") String adressUser) {
+	public List<User> retrieveUserByAdress(@PathVariable("user-adress") String adressUser) {
 	return us.retrieveUserByAdress(adressUser);
 	}
 				
-	// http://localhost:9091/SpringMVC/servlet/retrieve-user-by-date/{appUser-date}
+	// http://localhost:9091/SpringMVC/servlet/retrieve-user-by-date/{user-date}
 	@GetMapping("/retrieve-user-by-date/{user-date}")
 	@ResponseBody
-	public List<AppUser> retrieveUserByDate(@PathVariable("user-date") Date birthDateUser) {
+	public List<User> retrieveUserByDate(@PathVariable("user-date") Date birthDateUser) {
 	return us.retrieveUserByDate(birthDateUser);
 	}
 				
-	// http://localhost:9091/SpringMVC/servlet/retrieve-user-by-gender/{appUser-gender}
-	@GetMapping("/retrieve-user-by-gender/{user-gender}")
+	// http://localhost:9091/SpringMVC/servlet/retrieve-user-by-sexe/{user-sexe}
+	@GetMapping("/retrieve-user-by-sexe/{user-sexe}")
 	@ResponseBody
-	public List<AppUser> retrieveUserByGender(@PathVariable("user-gender") tn.esprit.Entity.Gender gender) {
-	return us.retrieveUserByGender(gender);
+	public List<User> retrieveUserBySexe(@PathVariable("user-sexe") tn.esprit.Entity.SexeType sexeUser) {
+	return us.retrieveUserBySexe(sexeUser);
 	}
 	
-	// http://localhost:9091/SpringMVC/servlet/retrieve-user-by-email/{appUser-email}
+	// http://localhost:9091/SpringMVC/servlet/retrieve-user-by-email/{user-email}
 	@GetMapping("/retrieve-user-by-email/{user-email}")
 	@ResponseBody
-	public AppUser retrieveUserByEmail(@PathVariable("user-email") String email) {
-	return us.findBymail(email);
+	public User retrieveUserByEmail(@PathVariable("user-email") String emailUser) {
+	return us.findBymail(emailUser);
 	}
 	
-
-	// http://localhost:9091/SpringMVC/servlet/retrieve-user-by-role/{appUser-role}
+	// http://localhost:9091/SpringMVC/servlet/retrieve-user-by-salaire/{user-salaire}
+	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
+	@GetMapping("/retrieve-user-by-salaire/{user-salaire}")
+	@ResponseBody
+	public List<User> retrieveUserBySalary(@PathVariable("user-salaire") float salaire) {
+	return us.retrieveUserBysalary(salaire);
+	}
+	
+	// http://localhost:9091/SpringMVC/servlet/retrieve-user-by-salairegt/{user-salaire}
+	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
+	@GetMapping("/retrieve-user-by-salairegt/{user-salaire}")
+	@ResponseBody
+	public List<User> retrieveUserBySalarygt(@PathVariable("user-salaire") float salaire) {
+	return ur.findBySalaireGreaterThan(salaire);
+	}
+	
+	// http://localhost:9091/SpringMVC/servlet/retrieve-user-by-salairelt/{user-salaire}
+	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
+	@GetMapping("/retrieve-user-by-salairelt/{user-salaire}")
+	@ResponseBody
+	public List<User> retrieveUserBySalarylt(@PathVariable("user-salaire") float salaire) {
+	return ur.findBySalaireLessThan(salaire);
+	}
+	
+	// http://localhost:9091/SpringMVC/servlet/retrieve-user-by-role/{user-role}
 	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
 	@GetMapping("/retrieve-user-by-role/{user-role}")
 	@ResponseBody
-	public Optional<AppUser> retrieveUserByGender(@PathVariable("user-role") Role role) {
+	public List<User> retrieveUserBySexe(@PathVariable("user-role") Role role) {
 	return us.findByRole(role);
 	}
 	
 	// http://localhost:9091/SpringMVC/servlet/users-names
 	@GetMapping("/users-names")
 	public List<String> getAllUsersNames() throws Exception {
-	return ur.getAllMemberNames();
+	return ur.getAllClientNames();
 	}
 	
 	// http://localhost:9091/SpringMVC/servlet/activate-user
 	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
 	@PutMapping("/activate-user")
-	public AppUser activateUser(@RequestBody AppUser appUser) throws Exception {
-	return us.activateUser(appUser);
+	public User activateUser(@RequestBody User user) throws Exception {
+	return us.activateUser(user);
 	}
 	
 	// http://localhost:9091/SpringMVC/servlet/desactivate-User
 	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
 	@PutMapping("/desactivate-User")
-	public AppUser desactivateUser(@RequestBody AppUser appUser) throws Exception {
-	return us.desactivateUser(appUser);
+	public User desactivateUser(@RequestBody User user) throws Exception {
+	return us.desactivateUser(user);
 	}
 	
 	// http://localhost:9091/SpringMVC/servlet/count-user
 	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
 	@GetMapping("/count-user")
 	@ResponseBody
-	public long retrieveMemberByCount() {
+	public long retrieveClientByCount() {
 	return us.retrieveUserByCount();
 	}
 	
@@ -187,7 +211,27 @@ public class UserRestController {
 	public List<String> findUserDisabled() throws Exception {
 		return us.getUsersFromDisabled();
 	}
-
+	
+	// http://localhost:9091/SpringMVC/servlet/moy-salaire
+	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
+	@GetMapping("/moy-salaire")
+	public float salairemoyenne() throws Exception {
+	return ur.retrievemoysalaire();
+	}
+	
+	// http://localhost:9091/SpringMVC/servlet/somme-salaire
+	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
+	@GetMapping("/somme-salaire")
+	public float salairesomme() throws Exception {
+	return ur.retrievesommesalaire();
+	}
+	
+	// http://localhost:9091/SpringMVC/servlet/max-salaire
+	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
+	@GetMapping("/max-salaire")
+	public float salairemax() throws Exception {
+	return ur.retrievemaxsalaire();
+	}
 	
 	// http://localhost:9091/SpringMVC/servlet/min-age
 	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
@@ -195,26 +239,60 @@ public class UserRestController {
 	public Date agemin() throws Exception {
 	return ur.getminage();
 	}
-
 	
-	@GetMapping("/sendme/{email}")
-	public void forgotpass(@PathVariable ("email") String email){
-		us.forgotpass(email);
+	@GetMapping("/sendme/{emailUser}")
+	public void forgotpass(@PathVariable ("emailUser") String emailUser){
+		us.forgotpass(emailUser);
 	}
 	
-	@PutMapping("/updatepassword/{email}/{password}/{cpassword}")
-	void updatePassword(@PathVariable ("email") String email, @PathVariable ("password") String newPassword,@PathVariable ("cpassword") String confirmPassword){
-		us.updatePassword(email, newPassword,confirmPassword);
+	@PutMapping("/updatepassword/{emailUser}/{password}/{cpassword}")
+	void updatePassword(@PathVariable ("emailUser") String emailUser, @PathVariable ("password") String newPassword,@PathVariable ("cpassword") String confirmPassword){
+		us.updatePassword(emailUser, newPassword,confirmPassword);
 	}
 	
 	
 	
+	 @PostMapping("/userss")
+	 public ResponseEntity<Response> createUser (@RequestParam("file") MultipartFile file,
+			 @RequestParam("article") String product) throws JsonParseException , JsonMappingException , Exception
+	 {
+		 System.out.println("Ok .............");
+        User prod = new ObjectMapper().readValue(product, User.class);
+        boolean isExit = new File(context.getRealPath("/Images/")).exists();
+        if (!isExit)
+        {
+        	new File (context.getRealPath("/Images/")).mkdir();
+        	System.out.println("mk dir.............");
+        }
+        String filename = file.getOriginalFilename();
+        String newFileName = FilenameUtils.getBaseName(filename)+"."+FilenameUtils.getExtension(filename);
+        File serverFile = new File (context.getRealPath("/Images/"+File.separator+newFileName));
+        try
+        {
+        	System.out.println("Image");
+        	 FileUtils.writeByteArrayToFile(serverFile,file.getBytes());
+        	 
+        }catch(Exception e) {
+        	e.printStackTrace();
+        }
 
+       
+        prod.setFileName(newFileName);
+        User art = ur.save(prod);
+        if (art != null)
+        {
+        	return new ResponseEntity<Response>(new Response (""),HttpStatus.OK);
+        }
+        else
+        {
+        	return new ResponseEntity<Response>(new Response ("User not saved"),HttpStatus.BAD_REQUEST);	
+        }
+	 }
 	 
 	// http://localhost:9090/SpringMVC/servlet/Imgarticles/{id}
 			@GetMapping("/Imguserss/{id}")
 			 public byte[] getPhotos(@PathVariable("id") int id) throws Exception{
-				 AppUser prod  = ur.findById(id).get();
+				 User prod  = ur.findById(id).get();
 				 return Files.readAllBytes(Paths.get(context.getRealPath("/Images/")+prod.getFileName()));
 			 }
 }

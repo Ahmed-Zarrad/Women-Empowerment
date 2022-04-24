@@ -12,64 +12,70 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 
-@Table (name = "APPUSER")
-public class AppUser implements Serializable {
+@Table (name = "USER")
+public class User implements Serializable {
 
 	/**
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	protected int idUser;
-	@Enumerated(EnumType.STRING)
-	private Role role;
-	protected String username;
-	protected String lastNameUser;
-	protected String password;
-	protected String confirmPasswordUser;
-	protected boolean stateUser;
-	protected int phoneNumberUser;
-	protected String adressUser;
-	@Temporal(TemporalType.DATE)
-	protected Date birthDateUser;
-	protected String email;
-	@Enumerated(EnumType.STRING)
-	protected Gender gender;
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	protected int idUser ;
+	protected String username ;
+	protected String lastNameUser ;
+	protected String cinUser ;
+	protected String password ;
+	protected String confirmPasswordUser ;
+	protected boolean stateUser ;
+	protected String phoneNumberUser ;
+	protected String adressUser ;
+	@Temporal (TemporalType.DATE)
+	protected Date birthDateUser ;
+	protected String emailUser ;
+	@Enumerated (EnumType.STRING)
+	protected SexeType sexeUser ;
 	protected boolean accountNonLocked;
 	@Column(name = "failedAttempt", columnDefinition = "int default 0")
 	protected int failedAttempt;
 	@Column(name = "lockTime")
 	protected Date lockTime;
-	protected String  resettoken;
+	@Column(name = "resettoken")
+	protected String resetPasswordToken;
 	protected boolean isBlocked;
 	protected LocalDate blockDate;
 	protected LocalDate unBlockDate;
+	protected boolean isPrivate;
+	protected float salaire;
+	protected int pointnumber;
 	protected boolean avilaibility;
+	@Enumerated(EnumType.STRING)
+	private ZoneMap zone;
+	@Enumerated(EnumType.STRING)
+	private Role role;
 	private String fileName;
 
 	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "appUser")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 
 	private List<Claim> claims;
 	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "appUser")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 
 	private List<Appointement> Appointements;
 	@JsonIgnore
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "appUser")
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
 
 	private Membership membership;
 	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "appUser")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private List<Comment> comments;
 	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "appUser")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private List<Publicity> publicitys;
 	@JsonIgnore
-	@ManyToMany(mappedBy="appUsers", cascade = CascadeType.ALL)
-	private Set<CharityEvent> events;
-	@JsonIgnore
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+	private Reservation reservation;
 	@OneToMany(cascade = CascadeType.ALL)
 	private Set<ImageUser> ImageUser1;
 
@@ -80,14 +86,6 @@ public class AppUser implements Serializable {
 
 	public void setIdUser(int idUser) {
 		this.idUser = idUser;
-	}
-
-	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
 	}
 
 	public String getUsername() {
@@ -104,6 +102,14 @@ public class AppUser implements Serializable {
 
 	public void setLastNameUser(String lastNameUser) {
 		this.lastNameUser = lastNameUser;
+	}
+
+	public String getCinUser() {
+		return cinUser;
+	}
+
+	public void setCinUser(String cinUser) {
+		this.cinUser = cinUser;
 	}
 
 	public String getPassword() {
@@ -130,11 +136,11 @@ public class AppUser implements Serializable {
 		this.stateUser = stateUser;
 	}
 
-	public int getPhoneNumberUser() {
+	public String getPhoneNumberUser() {
 		return phoneNumberUser;
 	}
 
-	public void setPhoneNumberUser(int phoneNumberUser) {
+	public void setPhoneNumberUser(String phoneNumberUser) {
 		this.phoneNumberUser = phoneNumberUser;
 	}
 
@@ -154,20 +160,20 @@ public class AppUser implements Serializable {
 		this.birthDateUser = birthDateUser;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getEmailUser() {
+		return emailUser;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmailUser(String emailUser) {
+		this.emailUser = emailUser;
 	}
 
-	public Gender getGender() {
-		return gender;
+	public SexeType getSexeUser() {
+		return sexeUser;
 	}
 
-	public void setGender(Gender gender) {
-		this.gender = gender;
+	public void setSexeUser(SexeType sexeUser) {
+		this.sexeUser = sexeUser;
 	}
 
 	public boolean isAccountNonLocked() {
@@ -194,12 +200,12 @@ public class AppUser implements Serializable {
 		this.lockTime = lockTime;
 	}
 
-	public String getResettoken() {
-		return resettoken;
+	public String getResetPasswordToken() {
+		return resetPasswordToken;
 	}
 
-	public void setResettoken(String resettoken) {
-		this.resettoken = resettoken;
+	public void setResetPasswordToken(String resetPasswordToken) {
+		this.resetPasswordToken = resetPasswordToken;
 	}
 
 	public boolean isBlocked() {
@@ -226,12 +232,52 @@ public class AppUser implements Serializable {
 		this.unBlockDate = unBlockDate;
 	}
 
+	public boolean isPrivate() {
+		return isPrivate;
+	}
+
+	public void setPrivate(boolean aPrivate) {
+		isPrivate = aPrivate;
+	}
+
+	public float getSalaire() {
+		return salaire;
+	}
+
+	public void setSalaire(float salaire) {
+		this.salaire = salaire;
+	}
+
+	public int getPointnumber() {
+		return pointnumber;
+	}
+
+	public void setPointnumber(int pointnumber) {
+		this.pointnumber = pointnumber;
+	}
+
 	public boolean isAvilaibility() {
 		return avilaibility;
 	}
 
 	public void setAvilaibility(boolean avilaibility) {
 		this.avilaibility = avilaibility;
+	}
+
+	public ZoneMap getZone() {
+		return zone;
+	}
+
+	public void setZone(ZoneMap zone) {
+		this.zone = zone;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	public String getFileName() {
@@ -282,92 +328,83 @@ public class AppUser implements Serializable {
 		this.publicitys = publicitys;
 	}
 
-	public Set<CharityEvent> getEvents() {
-		return events;
+	public Reservation getReservation() {
+		return reservation;
 	}
 
-	public void setEvents(Set<CharityEvent> events) {
-		this.events = events;
+	public void setReservation(Reservation reservation) {
+		this.reservation = reservation;
 	}
 
 	public Set<ImageUser> getImageUser1() {
 		return ImageUser1;
 	}
 
-
 	public void setImageUser1(Set<ImageUser> imageUser1) {
 		ImageUser1 = imageUser1;
-
 	}
 
-	public AppUser() {
-		super();
-		// TODO Auto-generated constructor stub
+	public User() {
 	}
 
-	public AppUser(int idUser, Role role, String username, String lastNameUser, String password,
-				   String confirmPasswordUser, boolean stateUser, int phoneNumberUser, String adressUser,
-				   Date birthDateUser, String email, Gender gender, boolean accountNonLocked, int failedAttempt,
-				   Date lockTime, String resettoken, boolean isBlocked, LocalDate blockDate, LocalDate unBlockDate,
-				   boolean avilaibility, String fileName, List<Claim> claims, List<Appointement> appointements,
-				   Membership membership, List<Comment> comments, List<Publicity> publicitys, Set<CharityEvent> events,
-				   Set<ImageUser> imageUser1) {
-		this.idUser = idUser;
-		this.role = role;
+	public User(String username, String lastNameUser, String cinUser, String password, String confirmPasswordUser, boolean stateUser, String phoneNumberUser, String adressUser, String emailUser, SexeType sexeUser, boolean accountNonLocked, int failedAttempt, boolean isBlocked, boolean isPrivate, boolean avilaibility, ZoneMap zone, Role role) {
 		this.username = username;
 		this.lastNameUser = lastNameUser;
+		this.cinUser = cinUser;
+		this.password = password;
+		this.confirmPasswordUser = confirmPasswordUser;
+		this.stateUser = stateUser;
+		this.phoneNumberUser = phoneNumberUser;
+		this.adressUser = adressUser;
+		this.emailUser = emailUser;
+		this.sexeUser = sexeUser;
+		this.accountNonLocked = accountNonLocked;
+		this.failedAttempt = failedAttempt;
+		this.isBlocked = isBlocked;
+		this.isPrivate = isPrivate;
+		this.avilaibility = avilaibility;
+		this.zone = zone;
+		this.role = role;
+	}
+
+	public User(int idUser, String username, String lastNameUser, String cinUser, String password, String confirmPasswordUser, boolean stateUser, String phoneNumberUser, String adressUser, Date birthDateUser, String emailUser, SexeType sexeUser, boolean accountNonLocked, int failedAttempt, Date lockTime, String resetPasswordToken, boolean isBlocked, LocalDate blockDate, LocalDate unBlockDate, boolean isPrivate, float salaire, int pointnumber, boolean avilaibility, ZoneMap zone, Role role, String fileName, List<Claim> claims, List<Appointement> appointements, Membership membership, List<Comment> comments, List<Publicity> publicitys, Reservation reservation, Set<ImageUser> imageUser1) {
+		this.idUser = idUser;
+		this.username = username;
+		this.lastNameUser = lastNameUser;
+		this.cinUser = cinUser;
 		this.password = password;
 		this.confirmPasswordUser = confirmPasswordUser;
 		this.stateUser = stateUser;
 		this.phoneNumberUser = phoneNumberUser;
 		this.adressUser = adressUser;
 		this.birthDateUser = birthDateUser;
-		this.email = email;
-		this.gender = gender;
+		this.emailUser = emailUser;
+		this.sexeUser = sexeUser;
 		this.accountNonLocked = accountNonLocked;
 		this.failedAttempt = failedAttempt;
 		this.lockTime = lockTime;
-		this.resettoken = resettoken;
+		this.resetPasswordToken = resetPasswordToken;
 		this.isBlocked = isBlocked;
 		this.blockDate = blockDate;
 		this.unBlockDate = unBlockDate;
+		this.isPrivate = isPrivate;
+		this.salaire = salaire;
+		this.pointnumber = pointnumber;
 		this.avilaibility = avilaibility;
+		this.zone = zone;
+		this.role = role;
 		this.fileName = fileName;
 		this.claims = claims;
 		Appointements = appointements;
 		this.membership = membership;
 		this.comments = comments;
 		this.publicitys = publicitys;
-		this.events = events;
+		this.reservation = reservation;
 		ImageUser1 = imageUser1;
 	}
 
-	public AppUser(Role role, String username, String lastNameUser, String password, String confirmPasswordUser,
-				   boolean stateUser, int phoneNumberUser, String adressUser, String email, Gender gender,
-				   boolean accountNonLocked, int failedAttempt, boolean isBlocked,
-				   boolean avilaibility) {
-		this.role = role;
-		this.username = username;
-		this.lastNameUser = lastNameUser;
+	public User(String email, String password) {
 		this.password = password;
-		this.confirmPasswordUser = confirmPasswordUser;
-		this.stateUser = stateUser;
-		this.phoneNumberUser = phoneNumberUser;
-		this.adressUser = adressUser;
-		this.email = email;
-		this.gender = gender;
-		this.accountNonLocked = accountNonLocked;
-		this.failedAttempt = failedAttempt;
-
-		this.isBlocked = isBlocked;
-
-		this.avilaibility = avilaibility;
-
-
-	}
-
-	public AppUser( String email,String password) {
-		this.password = password;
-		this.email = email;
+		this.emailUser = email;
 	}
 }

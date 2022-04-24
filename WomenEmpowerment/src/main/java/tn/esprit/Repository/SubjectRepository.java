@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import tn.esprit.Entity.AppUser;
+import tn.esprit.Entity.User;
 import tn.esprit.Entity.Subject;
 
 import java.sql.Date;
@@ -21,16 +21,16 @@ public interface SubjectRepository extends JpaRepository<Subject, Integer> {
 	Subject findBytitleSub(String titleSub);
 	
 
-	List<Subject> findByAppUser(AppUser appAppUser);
+	List<Subject> findByUser(User user);
 	
 	
 	
-	@Query("SELECT s FROM Subject s join s.appUser c where c.idUser=:Iduser")
+	@Query("SELECT s FROM Subject s join s.user c where c.idUser=:Iduser")
 	public List<Subject> getAllSubjectbyId(@Param("Iduser") int Iduser);
 	
 	
 	
-	@Query("SELECT s FROM Subject s join s.appUser c where c.username=:name")
+	@Query("SELECT s FROM Subject s join s.user c where c.username=:name")
 	public List<Subject> getAllSubjectByName(@Param("name") String name);
 	
 	

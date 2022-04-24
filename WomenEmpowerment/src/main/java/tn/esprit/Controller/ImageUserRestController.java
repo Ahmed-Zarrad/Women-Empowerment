@@ -36,8 +36,11 @@ public class ImageUserRestController {
 	    return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
 	    }
 		}
-	  
-		// http://localhost:9091/SpringMVC/servlet/affect-image-to-user
+
+
+
+
+	// http://localhost:9091/SpringMVC/servlet/affect-image-to-user
 		@PostMapping("/affect-image-to-user/{idimage}/{iduser}")
 		@ResponseBody
 		public void affectationImageToUser(@PathVariable("idimage") int idimage,@PathVariable("iduser")Integer iduser) throws IOException{

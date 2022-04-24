@@ -54,7 +54,7 @@ public class Subject implements Serializable{
 
 	@JsonIgnore
 	@ManyToOne
-	private AppUser appUser;
+	private User user;
 
 
 	@JsonIgnore

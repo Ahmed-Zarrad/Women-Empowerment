@@ -1,9 +1,9 @@
 package tn.esprit.Service;
 
 import org.springframework.http.ResponseEntity;
-import tn.esprit.Entity.AppUser;
 import tn.esprit.Entity.Role;
-import tn.esprit.Entity.Gender;
+import tn.esprit.Entity.SexeType;
+import tn.esprit.Entity.User;
 import tn.esprit.Exception.UserNotFoundException;
 
 import java.util.Date;
@@ -12,76 +12,75 @@ import java.util.Optional;
 
 public interface IUserService {
 
+	public boolean existsEmail(String emailUser);
 
 
-	AppUser updateUser(AppUser appUser) throws Exception;
+	public User getByEmail(String emailUser);
+	void save(User user);
+	User saveUser(User user);
+	ResponseEntity<?> addUser(User user);
+	
+	ResponseEntity<?> ajouterUser(User user);
+
+	User updateUser(User user) throws Exception;
 
 	boolean deleteUser(int idUser);
 
-	AppUser retrieveUserById(int idUser);
+	User retrieveUserById(int idUser);
+	
+	List<User> retrieveAllUsers();
+	
+	List<User> retrieveUserByPoint(int pointNumber);
 
-	List<AppUser> retrieveAllUsers();
+	User retrieveUserByUsername(String username);
 
+	List<User> retrieveUserByState(boolean stateUser);
 
-	AppUser retrieveUserByUsername(String username);
+	List<User> retrieveUserByAdress(String adressUser);
 
-	List<AppUser> retrieveUserByState(boolean stateUser);
+	List<User> retrieveUserByDate(Date birthDateUser);
 
-	List<AppUser> retrieveUserByAdress(String adressUser);
+	List<User> retrieveUserBySexe(SexeType sexeUser);
+	
+	User findBymail(String emailUser);
+	
+	List<User> retrieveUserBysalary(float salaire);
 
-	List<AppUser> retrieveUserByDate(Date birthDateUser);
-
-	List<AppUser> retrieveUserByGender(Gender gender);
-
-	AppUser findBymail(String email);
-
-
-	Optional<AppUser> findByRole(Role role);
-
-	public AppUser activateUser (AppUser appUser) throws Exception;
-
-	public AppUser desactivateUser (AppUser appUser) throws Exception;
+	List<User> findByRole(Role role);
+	
+	public User activateUser (User user) throws Exception;
+	
+	public User desactivateUser (User user) throws Exception;
 
 	long retrieveUserByCount();
-
-	public List<String> findUsersActivated() throws Exception;
-
+	
+	public List<String> findUsersActivated() throws Exception;	
+	
 	public List<String> getUsersFromDisabled();
+	
+	public void increaseFailedAttempts(User user);
+	
+	boolean unlockWhenTimeExpired(User user);
+	
+	void resetFailedAttempts(String emailUser);
+	
+	void lock(User user);
+	
+	//public User findUserByResetToken(String token);
 
-	public void increaseFailedAttempts(AppUser appUser);
+	void updateResettoken(String token, String emailUser) throws UserNotFoundException;
 
-	boolean unlockWhenTimeExpired(AppUser appUser);
+	User get(String resettoken);
 
-	void resetFailedAttempts(String email);
+	//void updatePassword(User user, String newPassword);
 
-	void lock(AppUser appUser);
+	User getByResetPasswordToken(String token);
 
-	//public AppUser findUserByResetToken(String token);
+	void forgotpass(String emailuser);
 
-	void updateResettoken(String token, String email) throws UserNotFoundException;
+	
 
-	AppUser get(String resettoken);
-
-	//void updatePassword(AppUser appUser, String newPassword);
-
-	AppUser getByResettoken(String token);
-
-	void forgotpass(String email);
-
-
-
-	void updatePassword(String email, String newPassword, String confirmPassword);
-
-	void save(AppUser appUser);
-	AppUser saveUser(AppUser appUser);
-	ResponseEntity<?> addAdmin(AppUser admin);
-	ResponseEntity<?> addMember(AppUser member);
-	boolean existsEmail(String email);
-	AppUser getByEmail(String email);
-
-
+	void updatePassword(String emailUser, String newPassword, String confirmPassword);
 
 
 }
-
-

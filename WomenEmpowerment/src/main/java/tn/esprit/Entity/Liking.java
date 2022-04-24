@@ -40,6 +40,6 @@ public class Liking implements Serializable{
 	
 	@JsonIgnore
 	@ManyToOne
-	private AppUser appUser;
+	private User user;
 
 }

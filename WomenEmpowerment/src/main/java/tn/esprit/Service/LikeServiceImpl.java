@@ -3,7 +3,7 @@ package tn.esprit.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tn.esprit.Entity.AppUser;
+import tn.esprit.Entity.User;
 import tn.esprit.Entity.Liking;
 import tn.esprit.Entity.ReactType;
 import tn.esprit.Entity.Subject;
@@ -25,7 +25,7 @@ public class LikeServiceImpl implements ILikeService {
 	SubjectRepository subrepo;
 	
 	@Autowired
-	IUserRepository appUserrepo;
+	IUserRepository userrepo;
 
 	@Override
 	public boolean isLikeExists(int idUser, int idSubject) {
@@ -45,7 +45,7 @@ public class LikeServiceImpl implements ILikeService {
 		}
 		
 		else {
-			AppUser appUser =  appUserrepo.findById(idUser).get();
+			User user =  userrepo.findById(idUser).get();
 
 			Subject subject =  subrepo.findById(idSubject).get();
 			
@@ -61,7 +61,7 @@ public class LikeServiceImpl implements ILikeService {
 					return false;
 				}
 			}
-			li.setAppUser(appUser);
+			li.setUser(user);
 			li.setSubject(subject);
 			
 			likerepo.save(li);

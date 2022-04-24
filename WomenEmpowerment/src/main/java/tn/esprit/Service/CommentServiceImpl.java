@@ -3,7 +3,7 @@ package tn.esprit.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tn.esprit.Entity.AppUser;
+import tn.esprit.Entity.User;
 import tn.esprit.Entity.Comment;
 import tn.esprit.Entity.Subject;
 import tn.esprit.Repository.CommentRepository;
@@ -24,7 +24,7 @@ public class CommentServiceImpl implements ICommentService {
 	SubjectRepository subrepo;
 	
 	@Autowired
-	IUserRepository appUserrepo;
+	IUserRepository userrepo;
 	
 	
 	
@@ -86,7 +86,7 @@ public class CommentServiceImpl implements ICommentService {
 		
          Subject subjectt = subrepo.findById(idS).orElse(null);
 		
-         AppUser appUser = appUserrepo.findById(idU).orElse(null);
+         User user = userrepo.findById(idU).orElse(null);
          
 		List<String> badwords=new ArrayList<>();
 		badwords.add("badbad");
@@ -106,7 +106,7 @@ public class CommentServiceImpl implements ICommentService {
 			com=com+" "+mots;}
 	 c.setDescriptionCom(com);
 	 c.setSubject(subjectt);
-	 c.setAppUser(appUser);
+	 c.setUser(user);
 	 comrepo.save(c);
 	return c.getIdCom();
 	}

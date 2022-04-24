@@ -20,7 +20,7 @@ public class SubjectRestController {
 	ISubjectService subrepo;
 	
 	
-	// http://localhost:8085/addSubject/{idAppUser}
+	// http://localhost:8085/addSubject/{idUser}
 	
 	@PostMapping("/addSubject/{Id}")
 	public Subject addSubject(@RequestBody Subject subjects, @PathVariable("Id") int Id){
@@ -35,7 +35,7 @@ public class SubjectRestController {
 	}
 	*/
 	
-	// http://localhost:8085/aaaddSubject/{idAppUser}
+	// http://localhost:8085/aaaddSubject/{idUser}
 	
 	@PostMapping("/aaaddSubject/{Id}")
 	public String aaaddSubject(@RequestBody Subject s, @PathVariable int Id){
@@ -79,14 +79,14 @@ public class SubjectRestController {
 	
 
 	
-	// http://localhost:8085/listeSubjectByAppUser/{idappUser}
+	// http://localhost:8085/listeSubjectByUser/{iduser}
 	
-	@GetMapping("/listeSubjectByAppUser/{idappUser}")
-	public List<Subject> listeSubjectByAppUser(@PathVariable ("idappUser")int Id){
-		return subrepo.listeSubjectByAppUser(Id);
+	@GetMapping("/listeSubjectByUser/{iduser}")
+	public List<Subject> listeSubjectByUser(@PathVariable ("iduser")int Id){
+		return subrepo.listeSubjectByUser(Id);
 	}
 	
-	// http://localhost:8085/getAllSubjectbyId/{idappUser}
+	// http://localhost:8085/getAllSubjectbyId/{iduser}
 	
 		@GetMapping("/getAllSubjectbyId/{Iduser}")
 		

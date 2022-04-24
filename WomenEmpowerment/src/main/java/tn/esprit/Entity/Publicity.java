@@ -58,5 +58,5 @@ public class Publicity implements Serializable {
 	
 	
 	@ManyToOne
-    AppUser appUser;
+    User user;
 }

@@ -1,9 +1,13 @@
 package tn.esprit.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import tn.esprit.Entity.Condidat;
 import tn.esprit.Repository.CondidatRepository;
+import tn.esprit.Response.ResponseMessage;
 import tn.esprit.Service.CondidatService;
 
 import java.util.List;
@@ -80,6 +84,18 @@ public class CondidatController {
         return condidatService.getCondidatByStatus(status);
     }
 
+    @PostMapping("/uploadedCv")
+    public ResponseEntity<ResponseMessage> uploadCV(@RequestParam("file") MultipartFile file) {
+        String message = "";
+        try {
+            condidatService.addCv(file);
+            message = "Uploaded the file successfully: " + file.getOriginalFilename();
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
+        }catch (Exception e) {
+            message = "Could not upload the file: " + file.getOriginalFilename() + "!";
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
+        }
+    }
 
 
 

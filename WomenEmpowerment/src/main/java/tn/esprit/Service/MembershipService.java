@@ -3,7 +3,7 @@ package tn.esprit.Service;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import tn.esprit.Entity.AppUser;
+import tn.esprit.Entity.User;
 import tn.esprit.Entity.Membership;
 import tn.esprit.Repository.MembershipRepository;
 import tn.esprit.Repository.IUserRepository;
@@ -67,17 +67,17 @@ public Membership addMembership (Membership membership){
 	@Override
 	public Membership addMembership2(Membership membership, Integer idUser) {
 
-		Optional<AppUser>c=userRepository.findById(idUser);
-		AppUser u2=c.get();
-		membership.setAppUser(u2);
+		Optional<User>c=userRepository.findById(idUser);
+		User u2=c.get();
+		membership.setUser(u2);
 		return membershipRepository.save(membership);
 	}
 
 	/*public void ajouterETaffectermembership(Long idUser, long idMem){
 
-		AppUser appUser = membershipRepository.findById(idMem).orElse(null);
+		User user = membershipRepository.findById(idMem).orElse(null);
 
-		AppUser appUser = userRepository.findById(idUser).orElse(null);
+		User user = userRepository.findById(idUser).orElse(null);
 
 		se
 		}

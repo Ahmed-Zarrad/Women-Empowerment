@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-import tn.esprit.Entity.AppUser;
+import tn.esprit.Entity.User;
 import tn.esprit.Entity.ImageUser;
 import tn.esprit.Repository.IImageUserRepository;
 import tn.esprit.Repository.IUserRepository;
@@ -31,9 +31,9 @@ public class ImageUserServiceImpl implements IImageUserService{
 	 @Override
 		public void affectationImageToUser(int idImageUser, Integer idUser) {
 			// TODO Auto-generated method stub
-			AppUser appUser =ur.findById(idUser).get();
+			User user =ur.findById(idUser).get();
 			ImageUser imageUser=iur.findById(idImageUser).get();
-			imageUser.setUser(appUser);
+			imageUser.setUser(user);
 			iur.save(imageUser);
 }
 
