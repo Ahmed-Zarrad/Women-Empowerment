@@ -96,7 +96,7 @@ public class UserServiceImpl implements IUserService{
 	@Override
 	public ResponseEntity<?> addUser(User user) {
 		
-	;
+
 		user.setStateUser(true);
 		user.setAccountNonLocked(true);
 		user.setFailedAttempt(0);
@@ -139,7 +139,7 @@ public class UserServiceImpl implements IUserService{
 	@Override
 	public ResponseEntity<?> ajouterUser(User user) {
 
-		
+		user.setRole(Role.ADMINISTRATOR);
 		if (user == null) {
 			return ResponseEntity.badRequest().body(new ResponseMessage("Error: please add values!"));
 		}

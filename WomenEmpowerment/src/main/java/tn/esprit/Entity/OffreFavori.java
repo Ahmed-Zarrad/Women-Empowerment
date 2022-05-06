@@ -17,10 +17,10 @@ public class OffreFavori {
     private Long offreFavoriId;
     @ManyToOne
     @JoinColumn(name = "condidat_id")
-    private Condidat user;
+    private Candidat user;
     @ManyToOne
     @JoinColumn(name = "offre_id")
-    private JobOffre jobOffre;
+    private Offre offre;
 
 
 }

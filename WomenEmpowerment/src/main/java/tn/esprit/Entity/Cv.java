@@ -21,7 +21,7 @@ public class Cv implements MultipartFile {
 	private byte[] data;
 	
 	@ManyToOne
-    Condidat condidat;
+	Candidat candidat;
 
 	@Override
 	public String getName() {
@@ -95,12 +95,12 @@ public class Cv implements MultipartFile {
 		this.data = data;
 	}
 
-	public Condidat getUser() {
-		return condidat;
+	public Candidat getUser() {
+		return candidat;
 	}
 
-	public void setUser(Condidat condidat) {
-		this.condidat = condidat;
+	public void setUser(Candidat candidat) {
+		this.candidat = candidat;
 	}
 
 	public Cv() {
@@ -117,19 +117,19 @@ public class Cv implements MultipartFile {
 		this.data = data;
 	}
 
-	public Cv(int idCv, String nameCv, byte[] data, Condidat condidat) {
+	public Cv(int idCv, String nameCv, byte[] data, Candidat candidat) {
 		super();
 		this.idCv = idCv;
 		this.nameCv = nameCv;
 		this.data = data;
-		this.condidat = condidat;
+		this.candidat = candidat;
 	}
 
-	public Cv(String nameCv, byte[] data, Condidat condidat) {
+	public Cv(String nameCv, byte[] data, Candidat candidat) {
 		super();
 		this.nameCv = nameCv;
 		this.data = data;
-		this.condidat = condidat;
+		this.candidat = candidat;
 	}
 
 	public Cv(int idCv, String nameCv, byte[] data) {

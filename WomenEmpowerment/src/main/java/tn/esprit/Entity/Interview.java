@@ -21,9 +21,9 @@ public class Interview {
     private Date dateFin;
     @ManyToOne
     @JoinColumn(name = "condidat_id")
-    private Condidat user;
+    private Candidat user;
     @ManyToOne
     @JoinColumn(name = "offre_id")
-    private JobOffre jobOffre;
+    private Offre offre;
 
 }

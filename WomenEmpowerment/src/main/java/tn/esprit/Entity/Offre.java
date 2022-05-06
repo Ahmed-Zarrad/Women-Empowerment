@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class JobOffre implements Serializable  {
+public class Offre implements Serializable  {
 
 	private static final long serialVersionUID = 1L;
 
@@ -26,7 +26,7 @@ public class JobOffre implements Serializable  {
 	private String offreDescription ;
 
 	@JsonIgnore
-	@OneToMany( mappedBy="jobOffre")
-	private List <Condidat> condidats;
+	@OneToMany( mappedBy= "offre")
+	private List <Candidat> candidats;
 
 }

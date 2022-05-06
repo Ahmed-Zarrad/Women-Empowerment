@@ -14,7 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Condidat implements Serializable   {
+public class Candidat implements Serializable   {
 	private static final long serialVersionUID = 1L;
 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -38,6 +38,6 @@ public class Condidat implements Serializable   {
 			insertable = false,
 			updatable = false,nullable = true
 	)
-	private JobOffre jobOffre ;
+	private Offre offre;
 
 }

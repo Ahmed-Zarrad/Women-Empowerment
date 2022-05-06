@@ -17,7 +17,7 @@ import tn.esprit.Service.IEmailService;
 import tn.esprit.Service.IUserService;
 
 @RestController
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin(origins="*")
 public class JwtAuthenticationController {
 
 	@Autowired

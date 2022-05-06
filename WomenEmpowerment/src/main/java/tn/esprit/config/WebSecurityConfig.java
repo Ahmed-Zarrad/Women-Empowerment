@@ -88,6 +88,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/servlet/costystocks").permitAll()
 		
 		.antMatchers("/servlet/allocateProductToStock/{idstock}/{idproduct}").permitAll()
+				.antMatchers("/servlet/api/**").permitAll()
+				.antMatchers("/servlet/api/**/**").permitAll()
 		
 		
 		
