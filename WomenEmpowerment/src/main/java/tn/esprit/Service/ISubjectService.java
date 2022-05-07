@@ -2,64 +2,26 @@ package tn.esprit.Service;
 
 import tn.esprit.Entity.Subject;
 
-import java.sql.Date;
 import java.util.List;
-
+import java.util.Optional;
 
 
 public interface ISubjectService {
 	
-	 public void addSubject(Subject subjects, int Id);
-	 
-	 public String aaaddSubject(Subject s, int Id);
-	 
-	 
-	 boolean deleteSubject(int IdSub);
-	 
-	 String updateSubject(Subject s , int id);
-	 
-	 
-	 List<Subject> retrieveAllSubject();
-	 
-	 
-      Subject  retrievesubject(String titleSub);
-      
-      
-      List<Subject> listeSubjectByUser(int Id);
-      
-     
-      List<Subject> getAllSubjectbyId(int Iduser);
-      
-      public List<Subject> getAllSubjectByName(String name);
-      
-      
-      public List<Subject> retrieveallSubjectByDate (Date d1,Date d2);
-    
-      
-      
-     
-      public List<String> getAllsubjecttitle();
-      
-      
-      List<Subject> retrieveSubjectByStarsGreaterThan(int starsNumberSubject);
-      
-      List<Subject> findByStarsNumberSubjectLessThan(int starsNumberSubject);
+	String addSubject(Subject s);
 
-	  
-      
-      List<Subject> retrievesuborderbystars();
-	 
-      
-      
-      public int getmaxstarsNumberSubject();
-      
-      
-      
-      List<Subject> afficherSubjectspluscomment();
-      
-      
-      
-	 
-	 
-	 
+	Subject updateSubject(Subject s);
+
+	boolean deleteSubject(int id);
+
+	Optional<Subject> retrieveSubjectById(int id);
+	
+	List<Subject> retrieveAllSubject();
+
+	List<Subject> retrieveSubjectByTitle(String titleSubject);
+
+	List<Subject> retrieveSubjectByStars(float starsNumberSubject);
+
+	List<Subject> retrieveSubjectByStarsless(float starsNumberSubject);
+
 }

@@ -2,222 +2,65 @@ package tn.esprit.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tn.esprit.Entity.User;
 import tn.esprit.Entity.Subject;
-import tn.esprit.Repository.CommentRepository;
-import tn.esprit.Repository.SubjectRepository;
-import tn.esprit.Repository.IUserRepository;
+import tn.esprit.Repository.ISubjectRepository;
 
-import java.sql.Date;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
-
+import java.util.Optional;
 
 @Service
-public class SubjectServiceImpl implements ISubjectService {
-	
-	
-	@Autowired
-	SubjectRepository subrepo;
-	
-	@Autowired
-	IUserRepository userrepo;
-	
-	@Autowired
-	CommentRepository comrepo;
+public class SubjectServiceImpl implements ISubjectService{
 
-
-	@Override
-	public void addSubject(Subject subjects, int Id) {
-		User user = userrepo.findById(Id).orElse(null);
-		subjects.setUser(user);
-        subrepo.save(subjects);
-		
-	}
-	 
+	@Autowired
+	ISubjectRepository sr;
 	
 	@Override
-	public String aaaddSubject(Subject s, int Id) {
-		User xxx = userrepo.findById(Id).orElse(null);
-		   s.setUser(xxx);
-		if (subrepo.findBytitleSub(s.getTitleSub()) != null){
-			
+	public String addSubject(Subject s) {
+		if (sr.existsByTitleSubject(s.getTitleSubject())){
 			return "This Subject Exist";
 		}else
-			return (String) subrepo.save(s).toString().concat("\n Subject Added Succefully");
+			return (String) sr.save(s).toString().concat("\n Subject Added Succefully");
 	}
-	
-	/*
-	@Override
-	 public String aaaddSubject(Subject s) {
-		if (subrepo.findBytitleSub(s.getTitleSub()) != null){
-			return "This Subject Exist";
-		}else
-			return (String) subrepo.save(s).toString().concat("\n Subject Added Succefully");
-	   }
-	
-	*/
 
 	@Override
-	public boolean deleteSubject(int IdSub) {
-		if (subrepo.existsById(IdSub)){
-			subrepo.deleteById(IdSub);
+	public Subject updateSubject(Subject s) {
+		return sr.save(s);
+	}
+
+	@Override
+	public boolean deleteSubject(int id) {
+		if (sr.existsById(id)){
+			sr.deleteById(id);
 			return true;
 		}else
 		return false;
+		
 	}
-	
 
 	@Override
-	public String updateSubject(Subject s, int id) {
-		User xxx = userrepo.findById(id).orElse(null);
-		   s.setUser(xxx);
-		if (subrepo.findBytitleSub(s.getTitleSub()) != null){
-			
-			return "This Subject Exist";
-		}else
-			return (String) subrepo.save(s).toString().concat("\n Subject Added Succefully");
+	public Optional<Subject> retrieveSubjectById(int id) {
+		return sr.findById(id);
 	}
-	
-	
-	
+
 	@Override
 	public List<Subject> retrieveAllSubject() {
-		
-		return (List<Subject>) subrepo.findAll();
+		// TODO Auto-generated method stub
+		return (List<Subject>) sr.findAll();
 	}
-
-	
-	
-	@Override
-	public Subject retrievesubject(String titleSub) {
-		return  subrepo.findBytitleSub(titleSub);
-	}
-
 
 	@Override
-	public List<Subject> listeSubjectByUser(int Id) {
-		User user = userrepo.findById(Id).orElse(null);
-		return subrepo.findByUser(user);
-		
+	public List<Subject> retrieveSubjectByTitle(String titleSubject) {
+		return (List<Subject>) sr.findByTitleSubject(titleSubject);
 	}
-
 
 	@Override
-	public List<Subject> getAllSubjectbyId(int Iduser) {
-		return subrepo.getAllSubjectbyId(Iduser);
+	public List<Subject> retrieveSubjectByStars(float starsNumberSubject) {
+		return (List<Subject>) sr.findByStarsNumberSubjectGreaterThan(starsNumberSubject);
 	}
-
 
 	@Override
-	public List<Subject> getAllSubjectByName(String name) {
-		return subrepo.getAllSubjectByName(name);
+	public List<Subject> retrieveSubjectByStarsless(float starsNumberSubject) {
+		return (List<Subject>) sr.findByStarsNumberSubjectLessThan(starsNumberSubject);
 	}
 
-
-	@Override
-	public List<Subject> retrieveallSubjectByDate(Date d1, Date d2) {
-		List<Subject> Subjectss = subrepo.retrieveallSubjectByDate(d1, d2);
-		return Subjectss;
-	}
-
-
-	@Override
-	public List<String> getAllsubjecttitle() {
-		return subrepo.subjecttitle();
-		
-	}
-
-
-	@Override
-	public List<Subject> retrieveSubjectByStarsGreaterThan(int starsNumberSubject) {
-		return subrepo.findByStarsNumberSubjectGreaterThan(starsNumberSubject);
-		
-	}
-
-
-	@Override
-	public List<Subject> findByStarsNumberSubjectLessThan(int starsNumberSubject) {
-		
-		return subrepo.findByStarsNumberSubjectLessThan(starsNumberSubject);
-		
-		
-	}
-
-
-	@Override
-	public int getmaxstarsNumberSubject() {
-		return subrepo.getmaxstarsNumberSubject();
-	}
-
-
-	
-
-    @Override
-	public List<Subject> retrievesuborderbystars() {
-
-		return subrepo.retrievesuborderbystars();
-	}
-
-
-	@Override
-	public List<Subject> afficherSubjectspluscomment() {
-		List<Subject> Subjectss = subrepo.findAll();
-		Comparator<Subject> comp = (x, y) ->y.getComments().size()-x.getComments().size();
-		return Subjectss.stream().sorted(comp).collect(Collectors.toList());
-	}
-
-
-	
-	
-	
-	
-
-
-
-
-
-	
-
-	
-
-
-	
-
-
-	
-
-
-
-
-	
-		
-	
-
-
-
-	
-
-
-
-	
-
-
-
-	
-
-
-	
-	
-
-	
-	
-	
-	
 }
-   
-	
-	
-	
-

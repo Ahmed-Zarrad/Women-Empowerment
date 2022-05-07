@@ -1,69 +1,105 @@
 package tn.esprit.Entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
+@JsonIgnoreProperties
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-public class Subject implements Serializable{
+@Table (name = "T_SUBJECT")
+public class Subject implements Serializable {
 
-
-
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = 1L;
-
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	private int idSubject ;
+	private String titleSubject ;
+	private String descriptionSubject ;
+	private float starsNumberSubject ;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="Subject")
+	private Set<Comment> Comment;
 
+	public int getIdSubject() {
+		return idSubject;
+	}
 
-	private int idSub ;
+	public void setIdSubject(int idSubject) {
+		this.idSubject = idSubject;
+	}
 
-	private String titleSub;
+	public String getTitleSubject() {
+		return titleSubject;
+	}
 
+	public void setTitleSubject(String titleSubject) {
+		this.titleSubject = titleSubject;
+	}
 
-	@Temporal(TemporalType.DATE)
-	private Date Datesub  ;
+	public String getDescriptionSubject() {
+		return descriptionSubject;
+	}
 
-	private String description;
+	public void setDescriptionSubject(String descriptionSubject) {
+		this.descriptionSubject = descriptionSubject;
+	}
 
-	private int starsNumberSubject ;
+	public float getStarsNumberSubject() {
+		return starsNumberSubject;
+	}
 
+	public void setStarsNumberSubject(float starsNumberSubject) {
+		this.starsNumberSubject = starsNumberSubject;
+	}
 
+	public Set<Comment> getComment() {
+		return Comment;
+	}
 
-	@JsonIgnore
-	@OneToMany(cascade=CascadeType.ALL , mappedBy="subject")
-	private List<Comment> comments;
+	public void setComment(Set<Comment> comment) {
+		Comment = comment;
+	}
 
+	public Subject() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
+	public Subject(int idSubject, String titleSubject, String descriptionSubject, float starsNumberSubject,
+			Set<tn.esprit.Entity.Comment> comment) {
+		super();
+		this.idSubject = idSubject;
+		this.titleSubject = titleSubject;
+		this.descriptionSubject = descriptionSubject;
+		this.starsNumberSubject = starsNumberSubject;
+		Comment = comment;
+	}
 
+	public Subject(String titleSubject, String descriptionSubject, float starsNumberSubject,
+			Set<tn.esprit.Entity.Comment> comment) {
+		super();
+		this.titleSubject = titleSubject;
+		this.descriptionSubject = descriptionSubject;
+		this.starsNumberSubject = starsNumberSubject;
+		Comment = comment;
+	}
 
+	public Subject(int idSubject, String titleSubject, String descriptionSubject, float starsNumberSubject) {
+		super();
+		this.idSubject = idSubject;
+		this.titleSubject = titleSubject;
+		this.descriptionSubject = descriptionSubject;
+		this.starsNumberSubject = starsNumberSubject;
+	}
 
+	public Subject(String titleSubject, String descriptionSubject, float starsNumberSubject) {
+		super();
+		this.titleSubject = titleSubject;
+		this.descriptionSubject = descriptionSubject;
+		this.starsNumberSubject = starsNumberSubject;
+	}
 
-	@JsonIgnore
-	@ManyToOne
-	private User user;
-
-
-	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="subject")
-	private List <Liking> likingSubject;
-
-
-
-
-
-
+	
 }

@@ -16,14 +16,25 @@ public class FileDB implements Serializable {
   private String type;
   @Lob
   private byte[] data;
+
+
+
+
+	@ManyToOne
+	private Publicity Publicity;
+
+	public Publicity getPublicity() {
+		return Publicity;
+	}
+	public void setPublicity(Publicity publicity) {
+		Publicity = publicity;
+	}
+	public FileDB() {
+	}
+
   
 
-  	
 
-  
-
-public FileDB() {
-  }
 public int getId() {
 	return id;
 }

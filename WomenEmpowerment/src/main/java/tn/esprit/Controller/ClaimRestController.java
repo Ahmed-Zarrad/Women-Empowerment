@@ -3,62 +3,57 @@ package tn.esprit.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.Entity.Claim;
-import tn.esprit.Service.ClaimService;
+import tn.esprit.Service.IClaimService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/Claim")
-public class ClaimRestController {
 
+@CrossOrigin("*")
+
+public class ClaimRestController{
+	
 	@Autowired
-	private ClaimService ClaimService ;
+	IClaimService Cs;
 	
 	
-	// http://localhost:8090/Claim/retrieveAllClaims
-	@GetMapping("/retrieveAllClaims")
+	// http://localhost:9091/SpringMVC/servlet/retrieve-all-claims
+	//@PreAuthorize("hasAuthority('ADMINISTRATOR')")
+	@GetMapping("/retrieve-all-claims")
 	@ResponseBody
-	public List<Claim> retrieveAllClaims(){
-		return ClaimService.retrieveAllClaims();
+	public List<Claim> getClaims() {
+	List<Claim> list = Cs.retrieveAllClaims();
+	return list;
 	}
 	
-	
-	// http://localhost:8090/Claim/retrieveClaimById/{idClaim}
-	@GetMapping("/retrieveClaimById/{idClaim}")
+	// http://localhost:9091/SpringMVC/servlet/add-claim
+	@PostMapping("/add-claim")
 	@ResponseBody
-	public Claim retrieveClaimById(@PathVariable("idClaim") Integer  id){
-		return ClaimService.retrieveClaim(id);
+	public Claim addClaim(@RequestBody Claim c) {
+	Claim claim= Cs.addClaim(c);
+	return claim;
 	}
 	
-	
-	// http://localhost:8090/Claim/addClaim
-	@PostMapping("/addClaim")
-	public Claim addClaim(@RequestBody Claim c){
-		return ClaimService.addClaim(c);
-	}
-	// http://localhost:8090/Claim/addClaimCat
-
-	@PostMapping("/addClaimCat")
-	public Claim addClaimCat(@RequestBody Claim c){
-		return ClaimService.addClaimWithCategory(c);
-	}
-	// http://localhost:8090/Claim/updateClaim
-	@PutMapping("/updateClaim")
+	// http://localhost:9091/SpringMVC/servlet/retrieve-claim/{claim-id}
+	@GetMapping("/retrieve-claim/{claim-id}")
 	@ResponseBody
-	public Claim updateClaim(@RequestBody Claim c){
-		
-		return ClaimService.updateClaim(c);
+	public Claim retrieveClaim(@PathVariable("claim-id") int idClaim) {
+	return Cs.retrieveClaim(idClaim);
 	}
 	
-	
-	// http://localhost:8090/Claim/removeClaim/{Claim-id}
-
-	@DeleteMapping("/removeClaim/{Claim-id}")
+	// http://localhost:9091/SpringMVC/servlet/remove-claim/{claim-id}
+	//@PreAuthorize("hasAuthority('ADMINISTRATOR')")
+	@DeleteMapping("/remove-claim/{claim-id}")
 	@ResponseBody
-	public void removeClaim(@PathVariable("Claim-id") Integer ClaimId) {
-		ClaimService.deleteClaim(ClaimId);
+	public void removeUser(@PathVariable("claim-id") int idClaim) {
+	Cs.deleteClaim(idClaim);
 	}
 	
-	
-	
+	// http://localhost:9091/SpringMVC/servlet/modify-claim
+	//@PreAuthorize("hasAuthority('ADMINISTRATOR')")
+	@PutMapping("/modify-claim")
+	@ResponseBody
+	public Claim modifyClaim(@RequestBody Claim c) {
+	return Cs.updateClaim(c);
 }
+	}

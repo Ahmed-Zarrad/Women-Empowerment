@@ -1,98 +1,103 @@
 package tn.esprit.Service;
 
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tn.esprit.Entity.User;
+import org.springframework.util.ObjectUtils;
 import tn.esprit.Entity.Comment;
 import tn.esprit.Entity.Subject;
 import tn.esprit.Repository.CommentRepository;
-import tn.esprit.Repository.SubjectRepository;
-import tn.esprit.Repository.IUserRepository;
+import tn.esprit.Repository.ISubjectRepository;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class CommentServiceImpl implements ICommentService {
+public class CommentServiceImpl implements CommentService {
+	
 	
 	
 	@Autowired
-	CommentRepository comrepo;
+	CommentRepository commentrepository ;
+	@Autowired
+	ISubjectRepository Sr ;
+	
 	
 	@Autowired
-	SubjectRepository subrepo;
-	
-	@Autowired
-	IUserRepository userrepo;
+	CommentService Cs;
 	
 	
 	
 	
-
+	private static final Logger L = LogManager.getLogger(CommentService.class);
 	
-
-	
-
-
-
 	@Override
-	public boolean deleteComment(int idCom) {
-		if (comrepo.existsById(idCom)){
-			comrepo.deleteById(idCom);
-			return true;
-		}else
-		return false;
-	}
-
-
-
-
-
-	@Override
-	public Comment updateComment(Comment c) {
-		return comrepo.save(c);
-
-	}
-
-
-
-
-
-	@Override
-	public List<Comment> getAllCommentBySubject(String titlesub) {
-		Subject subjectt = subrepo.findBytitleSub(titlesub);
-		return comrepo.findBySubject(subjectt);
+	public List<Comment> retrieveAllComments() {
+		List<Comment> comments =(List<Comment>) commentrepository.findAll();
+		for (Comment comment : comments){
+			L.info("comment +++ :" + comment);		
+		}
+		return comments;
 	
 	}
-
-
-
-
-
+	
+	
+	
+	
+	
+	
+	
 	@Override
-	public int getNombreComment(String title) {
-		
-		 return comrepo.countcomment(title);
-		
+	public Comment addComment(Comment c) {
+		return commentrepository.save(c);
 	}
-
-
-
-
-
+	
 	@Override
-	public int addCommentaire(Comment c, int idS , int idU) {
+	public void deleteComment(Long idComment) {
+		commentrepository.deleteById(idComment);
+	}
+	
+	//@Override
+//public Comment updateComment(Comment c) {
 		
-         Subject subjectt = subrepo.findById(idS).orElse(null);
+	//	return commentrepository.save(c);
+	//}
+	
+	@Override
+	public Comment retrieveComment(Long idComment) {
 		
-         User user = userrepo.findById(idU).orElse(null);
-         
+		return commentrepository.findById(idComment).get();
+	}
+	
+	
+	
+	
+	
+	@Override
+	public Long countNbcomments() {
+		return  commentrepository.count();
+	
+	
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@Transactional
+	@Override
+	public int ajouterCommentaire(Comment c) {
 		List<String> badwords=new ArrayList<>();
 		badwords.add("badbad");
 		badwords.add("badwords");
 		badwords.add("bads");
-		String motcommentaire[]=c.getDescriptionCom().split(" ");
+		String motcommentaire[]=c.getDescriptionComment().split(" ");
 		String com ="";
 		 
 	for(String mots:motcommentaire){
@@ -104,53 +109,25 @@ public class CommentServiceImpl implements ICommentService {
 			}
 		else
 			com=com+" "+mots;}
-	 c.setDescriptionCom(com);
-	 c.setSubject(subjectt);
-	 c.setUser(user);
-	 comrepo.save(c);
-	return c.getIdCom();
+	 c.setDescriptionComment(com);
+	 commentrepository.save(c);
+	return c.getIdComment().intValue();
 	}
-
-
-
-
-
 	
-
-
 	
-
-
 	
-
-
-
-
-
-
-
-
-
-
-/*
+	
+	/////////////////////////////to try ///////////////////
 	@Override
-	public void deleteAllComment(String title) {
-		comrepo.deleteAllComment(title);
+	public void affecterSubjecttoComment(int idSubject, long idComment) {
+		Comment comment = commentrepository.findById(idComment).get();
+		Subject subject = Sr.findById(idSubject).get();
+		if (!ObjectUtils.isEmpty(comment) && !ObjectUtils.isEmpty(subject))
+			comment.setSubject(subject);
+		Sr.save(subject);
 		
-	}
-
-*/
-
-
-
+		}
 	
-
-
-
-
-
-
-
 	
-
+	
 }

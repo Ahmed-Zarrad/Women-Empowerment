@@ -2,59 +2,55 @@ package tn.esprit.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tn.esprit.Entity.CategoryClaim;
 import tn.esprit.Entity.Claim;
-import tn.esprit.Repository.CategoryClaimRepository;
-import tn.esprit.Repository.ClaimRepository;
+import tn.esprit.Repository.IClaimRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
-
 @Service
-public class ClaimServiceImpl implements ClaimService{
+public class ClaimServiceImpl implements IClaimService {
 
+	
+	
+	
 	@Autowired
-	ClaimRepository claimrepository ;
-	@Autowired
-	CategoryClaimRepository categoryclaimRepository;
+	IClaimRepository cr;
+	
+
+	
 	@Override
 	public Claim addClaim(Claim c) {
-				return claimrepository.save(c);
-	}
-	@Override
-	public Claim addClaimWithCategory(Claim c) {
-		String[] splitted = c.getDescriptionClaim().split(" ");
-		List<String> keys = new ArrayList<String>();
-		for (String values : splitted) {
-			keys.add(values);
-		}
-		int cat = claimrepository.GET_CategooryAuto(keys);
-	    CategoryClaim categ = categoryclaimRepository.findById(cat).orElse(null);
-	    c.setCategoryclaim(categ);
- 		return claimrepository.save(c);
-}
-	@Override
-	public void deleteClaim(int id) {
-		claimrepository.deleteById(id);
+		
+		return cr.save(c);
 	}
 
 	@Override
-	public Claim updateClaim(Claim c) {
-		return claimrepository.save(c);
+	public boolean deleteClaim(int id) {
+		if(cr.existsById(id)){
+			cr.deleteById(id);
+			return true; 
+			
+		}else
+		{return false;}
+	}
+	
+	@Override
+	public Claim updateClaim(Claim c){
+		
+		return cr.save(c);
 	}
 
 	@Override
-	public Claim retrieveClaim(int id) {
-		return claimrepository.findById(id).orElse(null);
-
+	public Claim retrieveClaim(int id){
+		return cr.findById(id) .get();
 	}
-
+	
 	@Override
-	public List<Claim> retrieveAllClaims() {
-		return (List<Claim>) claimrepository.findAll();
+	public List<Claim> retrieveAllClaims(){
+		return (List<Claim>) cr.findAll();	
+		
 	}
 	
 	
-
+	
 }

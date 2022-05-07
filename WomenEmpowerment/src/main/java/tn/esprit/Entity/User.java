@@ -70,12 +70,9 @@ public class User implements Serializable {
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private List<Comment> comments;
-	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-	private List<Liking> likings;
-	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-	private List<Subject> subjects;
+
+
+
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private List<Publicity> publicitys;
@@ -325,22 +322,6 @@ public class User implements Serializable {
 		this.comments = comments;
 	}
 
-	public List<Liking> getLikings() {
-		return likings;
-	}
-
-	public void setLikings(List<Liking> likings) {
-		this.likings = likings;
-	}
-
-	public List<Subject> getSubjects() {
-		return subjects;
-	}
-
-	public void setSubjects(List<Subject> subjects) {
-		this.subjects = subjects;
-	}
-
 	public List<Publicity> getPublicitys() {
 		return publicitys;
 	}
@@ -368,7 +349,7 @@ public class User implements Serializable {
 	public User() {
 	}
 
-	public User(int idUser, String username, String lastNameUser, String cinUser, String password, String confirmPasswordUser, boolean stateUser, String phoneNumberUser, String adressUser, Date birthDateUser, String emailUser, SexeType sexeUser, boolean accountNonLocked, int failedAttempt, Date lockTime, String resetPasswordToken, boolean isBlocked, LocalDate blockDate, LocalDate unBlockDate, boolean isPrivate, float salaire, int pointnumber, boolean avilaibility, ZoneMap zone, Role role, String fileName, List<Claim> claims, List<Appointement> appointements, Membership membership, List<Comment> comments, List<Liking> likings, List<Subject> subjects, List<Publicity> publicitys, List<CharityEvent> charityEvents, Set<ImageUser> imageUser1) {
+	public User(int idUser, String username, String lastNameUser, String cinUser, String password, String confirmPasswordUser, boolean stateUser, String phoneNumberUser, String adressUser, Date birthDateUser, String emailUser, SexeType sexeUser, boolean accountNonLocked, int failedAttempt, Date lockTime, String resetPasswordToken, boolean isBlocked, LocalDate blockDate, LocalDate unBlockDate, boolean isPrivate, float salaire, int pointnumber, boolean avilaibility, ZoneMap zone, Role role, String fileName, List<Claim> claims, List<Appointement> appointements, Membership membership, List<Comment> comments, List<Publicity> publicitys, List<CharityEvent> charityEvents, Set<ImageUser> imageUser1) {
 		this.idUser = idUser;
 		this.username = username;
 		this.lastNameUser = lastNameUser;
@@ -395,15 +376,13 @@ public class User implements Serializable {
 		this.zone = zone;
 		this.role = role;
 		this.fileName = fileName;
-		this.claims = claims;
-		Appointements = appointements;
-		this.membership = membership;
-		this.comments = comments;
-		this.likings = likings;
-		this.subjects = subjects;
-		this.publicitys = publicitys;
-		this.charityEvents = charityEvents;
-		ImageUser1 = imageUser1;
+		//this.claims = claims;
+		//Appointements = appointements;
+		//this.membership = membership;
+		//this.comments = comments;
+		//this.publicitys = publicitys;
+		//this.charityEvents = charityEvents;
+		//ImageUser1 = imageUser1;
 	}
 
 	public User(String username, String lastNameUser, String cinUser, String password, String confirmPasswordUser, boolean stateUser, String phoneNumberUser, String adressUser, String emailUser, SexeType sexeUser, boolean accountNonLocked, int failedAttempt, boolean isBlocked, boolean isPrivate, boolean avilaibility, ZoneMap zone, Role role) {

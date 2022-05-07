@@ -4,11 +4,11 @@ import tn.esprit.Entity.Claim;
 
 import java.util.List;
 
-public interface ClaimService {
+public interface IClaimService {
 	
-	public Claim addClaim(Claim c);
+	Claim addClaim(Claim c);
 	
-	void deleteClaim(int id);
+	boolean deleteClaim(int id);
 	
 	Claim updateClaim(Claim c);
 
@@ -16,6 +16,5 @@ public interface ClaimService {
 
 	List<Claim> retrieveAllClaims();
 
-	Claim addClaimWithCategory(Claim c);
-}
 
+}
